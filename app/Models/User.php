@@ -53,7 +53,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Relación: Un usuario tiene muchos productos
+     * Relación: Un usuario tiene muchos productos (1:N)
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->hasMany(Producto::class);     
     }
   
+    /**
+     * Definir la relación: Un usuario puede tener muchos productos añadidos al carrito (1:N)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function carritos()
+    {
+        return $this->hasMany(Carrito::class);
+    }
+    
     //Mutator para email: Laravel automáticamente convierte el email a minúsculas antes de guardarlo en la base de datos
     public function setEmailAttribute($value)
     {

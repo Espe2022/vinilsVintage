@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarritoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,8 +30,18 @@ Route::middleware('auth')->group(function () {
     //Ruta de productos ya está protegida (a través del auth)
     //Resource (Contiene todas las rutas necesarias para los métodos de ProductoController)
     Route::resource('productos', ProductoController::class);
-
 });
+
+//Solo los usuarios logueados pueden acceder a estas rutas (middleware de autenticación)
+Route::middleware('auth')->group(function () {
+    //Index muestra los productos en el carrito
+    Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
+    //El controlador store añade el producto al carrito
+    Route::post('/carrito/agregar/{id}', [CarritoController::class, 'store'])->name('carrito.agregar');
+    //Destroy elimina el producto del carrito
+    Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'destroy'])->name('carrito.eliminar');
+});
+
 
 
 require __DIR__.'/auth.php';

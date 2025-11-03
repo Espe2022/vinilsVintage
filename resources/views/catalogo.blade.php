@@ -24,7 +24,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach ($productos as $producto)
-                <div class="bg-white rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
+                <div class="bg-white rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4 flex flex-col items-center">
                     <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
                         <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/300x300?text=Vinilo' }}" 
                              alt="{{ $producto->nombre }}" 
@@ -34,6 +34,22 @@
                     <p class="text-gray-600 text-center">{{ $producto->descripcion }}</p>
                     <p class="text-green-600 font-bold mt-2 text-center">${{ number_format($producto->precio, 2) }}</p>
                 </div>
+
+                <!-- Debajo de cada vinilo, agrega un botón solo visible si el usuario está autenticado -->
+                @auth
+                    <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST" class="mt-4 w-full text-center">
+                        @csrf
+                        <button type="submit" 
+                            class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-full transition w-full max-w-xs">
+                            🛒 Añadir al carrito
+                        </button>
+                    </form>
+                @endauth
+
+                <!-- Muestra un aviso si no está autenticado -->
+                @guest
+                    <p class="text-center text-gray-500 mt-3">Inicia sesión para comprar</p>
+                @endguest
             @endforeach
         </div>
 

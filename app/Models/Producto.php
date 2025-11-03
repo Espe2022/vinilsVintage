@@ -24,13 +24,23 @@ class Producto extends Model
     ];
 
     /**
-     * Definir la relación: Un producto pertenece a un usuario (N:1)
+     * Definir la relación: Un producto pertenece a un usuario (1:1)
      * 
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Definir la relación: Un producto puede estar en varios carritos (1:N)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function carritos()
+    {
+        return $this->hasMany(Carrito::class);
     }
 
 }
