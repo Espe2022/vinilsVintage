@@ -4,12 +4,6 @@
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow">
     <h2 class="text-3xl font-bold mb-6 text-center">🛍️ Tu Carrito</h2>
 
-    <!-- Botón Ver Carrito -->
-    <a href="{{ route('carrito.index') }}" 
-        class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-200">
-        🛒 Ver Carrito
-    </a>
-
     @forelse($items as $item)
         <div class="flex items-center justify-between border-b py-4">
             <div class="flex items-center space-x-4">

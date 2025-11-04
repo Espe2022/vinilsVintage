@@ -15,6 +15,14 @@
             <a href="/" class="text-white font-medium hover:text-gray-300 transition">Inicio</a>
             <a href="{{ route('login') }}" class="text-white font-medium hover:text-gray-300 transition">Login</a>
             <a href="{{ route('register') }}" class="text-white font-medium hover:text-gray-300 transition">Register</a>
+
+            <!-- Botón Ver Carrito (solo para usuarios autenticados) -->
+            @auth
+                <a href="{{ route('carrito.index') }}" 
+                   class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-200">
+                    🛍️ Ver Carrito
+                </a>
+            @endauth
         </nav>
     </div>
 

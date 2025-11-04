@@ -31,8 +31,14 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="p-6">
+                {{-- Si viene desde un componente Blade (usa $slot) --}}
+                @isset($slot)
+                    {{ $slot }}
+                @endisset
+
+                {{-- Si viene desde una vista con @extends --}}
+                @yield('content')
             </main>
         </div>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
