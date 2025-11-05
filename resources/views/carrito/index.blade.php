@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow">
-    <h2 class="text-3xl font-bold mb-6 text-center">🛍️ Tu Carrito</h2>
+<div class="max-w-4xl mx-auto p-6 bg-crema-suave rounded-xl shadow">
+    <h2 class="text-5xl text-center font-extrabold leading-tight tracking-tight text-marron-chocolate">🛍️ Tu Carrito</h2>
 
     @forelse($items as $item)
         <div class="flex items-center justify-between border-b py-4">

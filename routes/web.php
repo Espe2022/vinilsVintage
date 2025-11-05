@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CompraController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,8 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/carrito/agregar/{id}', [CarritoController::class, 'store'])->name('carrito.agregar');
     //Destroy elimina el producto del carrito
     Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'destroy'])->name('carrito.eliminar');
-});
 
+    //Finalizar compras
+    Route::post('/comprar', [CompraController::class, 'comprar'])->name('comprar');
+
+});
 
 
 require __DIR__.'/auth.php';
