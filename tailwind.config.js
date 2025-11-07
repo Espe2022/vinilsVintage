@@ -31,6 +31,9 @@ export default {
                 'bg-zinc-200': '#e4e4e7',
                 'bg-stone-400': '#a8a29e',
             },
+            boxShadow: {
+                'marron': '0 6px 12px rgba(90, 62, 43, 0.4)',   //Sombra marrón suave
+            },
         },
     },
 
