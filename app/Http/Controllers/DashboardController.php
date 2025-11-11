@@ -48,6 +48,7 @@ class DashboardController extends Controller
         //Pasar los datos a la vista
         return view('dashboard', [
             'nombres' => $nombres,
+            'productos' => $productosCombinados,
             'cantidades' => $cantidades
         ]);
 

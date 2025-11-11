@@ -19,7 +19,7 @@ Route::get('/', function () {
 //La función para devolver la vista desaparece y usamos el controlador DashboardController que es una clase
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//Acceder a Ver Catálogo (todos los productos) sin iniciar sesión de usuario
+//Acceder a Ver Catálogo (todos los productos)
 Route::get('/catalogo', [ProductoController::class, 'catalogo'])->name('catalogo');
 
 //Puede entrar en estas rutas siempre y cuando esté autenticado (Proteger las rutas)
@@ -44,7 +44,6 @@ Route::middleware('auth')->group(function () {
 
     //Finalizar compras
     Route::post('/comprar', [CompraController::class, 'comprar'])->name('comprar');
-
 });
 
 

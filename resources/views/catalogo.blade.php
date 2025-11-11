@@ -9,7 +9,7 @@
 <body class="bg-crema-suave text-marron-chocolate">
 
     <!-- Barra superior -->
-    <div class="bg-marron-chocolate text-white py-3 px-6 flex justify-between items-center shadow-md">
+    <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-between items-center shadow-md">
         <h1 class="text-2xl font-bold text-beige-tostado">🎵 Vinyls Vintage</h1>
         <nav class="flex items-center space-x-6">
             <a href="/" class="text-beige-tostado font-medium hover:bg-oro-antiguo transition">Inicio</a>
@@ -72,7 +72,7 @@
         </div>
     </section>
 
-    <footer class="bg-black text-white text-center py-6 mt-10">
+    <footer class="bg-marron-chocolate text-beige-tostado text-center py-6 mt-10">
         <p class="text-sm">© 2025 Vinyls Vintage — Todos los derechos reservados.</p>
     </footer>
 
