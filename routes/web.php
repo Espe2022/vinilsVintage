@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CompraController;
+use App\Http\Middleware\AdminMiddleware;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,10 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    //Ruta de productos ya está protegida (a través del auth)
-    //Resource (Contiene todas las rutas necesarias para los métodos de ProductoController)
-    Route::resource('productos', ProductoController::class);
 });
 
 //Solo los usuarios logueados pueden acceder a estas rutas (middleware de autenticación)
@@ -46,5 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/comprar', [CompraController::class, 'comprar'])->name('comprar');
 });
 
+//Sólo los usuarios admin pueden acceder a las rutas de productos (index, create, edit, etc.)
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::resource('productos', ProductoController::class);
+});
 
 require __DIR__.'/auth.php';

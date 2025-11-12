@@ -11,6 +11,23 @@
         <form action="/productos" method="POST">
             @csrf   <!--Formulario protegido-->
 
+            {{-- Usuario al que va destinado --}}
+            <div class="mb-4">
+                <label for="user_id" class="block text-sm font-medium text-marron-chocolate">Usuario</label>
+                <select name="user_id" id="user_id"
+                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
+                    <option value="">Selecciona un usuario</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('user_id')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+
             {{-- Nombre del producto --}}
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>

@@ -28,6 +28,7 @@
                             <th class="border border-marron-chocolate px-4 py-2">Descripción</th>
                             <th class="border border-marron-chocolate px-4 py-2">Precio</th>
                             <th class="border border-marron-chocolate px-4 py-2">Cantidad</th>
+                            <th class="border border-marron-chocolate px-4 py-2">Creado por</th>
                             <th class="border border-marron-chocolate px-4 py-2">Ver</th>
                             <th class="border border-marron-chocolate px-4 py-2">Actualizar</th>
                         </tr>
@@ -39,6 +40,7 @@
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->descripcion }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->precio }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->cantidad }}</td>
+                                <td class="border border-marron-chocolate px-4 py-2">{{ $producto->user->name ?? 'Sin asignar' }}</td> {{-- Nombre del creador --}}
                                 <td class="border border-marron-chocolate px-4 py-2"><a href="{{ route('productos.show', $producto->id) }}">
                                     <ion-icon name="eye" class="text-marron-chocolate text-3xl"></ion-icon>
                                 </a></td>
@@ -48,7 +50,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-4">
+                                <td colspan="7" class="text-center py-4">
                                     No hay productos registrados.
                                 </td>
                             </tr>

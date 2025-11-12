@@ -6,6 +6,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User; 
 
 class ProductoController extends Controller
 {
@@ -43,8 +44,13 @@ class ProductoController extends Controller
     }
 
     //Redirecciona a una vista de create para mostrar el formulario para crear un producto
-    public function create(){
-        return view('productos.create');
+    public function create()
+    {
+        //Trae todos los usuarios de la base de datos
+        $users = User::all();
+
+        //Pasa la variable $users a la vista
+        return view('productos.create', compact('users'));
     }
 
     //Guardar un producto en la base de datos

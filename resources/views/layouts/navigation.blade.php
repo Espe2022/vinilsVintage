@@ -21,6 +21,15 @@
                     <x-nav-link :href="route('catalogo')" :active="request()->routeIs('catalogo')">
                         {{ __('Catálogo') }}
                     </x-nav-link>
+
+                    <!-- Solo para admin, el botón “Administrar Discos” apunta al CRUD -->
+                    @auth
+                        @if (Auth::user()->role === 'admin')
+                            <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+                                {{ __('Administrar Discos') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 

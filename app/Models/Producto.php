@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
+    use HasFactory;
+
     //Indica explícitamente que la tabla de la base de datos 'productos' está asociada al modelo Producto.php
     protected $table='productos';
 
