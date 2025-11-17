@@ -23,6 +23,7 @@ class Producto extends Model
         'descripcion',
         'precio',
         'cantidad',
+        'imagen',
         'user_id',
     ];
 
