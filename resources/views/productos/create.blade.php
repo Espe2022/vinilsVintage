@@ -17,12 +17,13 @@
                 <select name="user_id" id="user_id"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
                     <option value="">Selecciona un usuario</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                            {{ $user->name }}
-                        </option>
-                    @endforeach
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                {{ $user->name }}
+                            </option>
+                        @endforeach
                 </select>
+                
                 @error('user_id')
                     <span class="text-sm text-red-600">{{ $message }}</span>
                 @enderror
@@ -79,6 +80,23 @@
                        @error('cantidad')
                             <span class="text-sm text-red-600">{{$message}}</span>
                        @enderror
+            </div>
+
+            {{-- Elegir la imagen de la BD --}}
+            <div class="mb-4">
+                <label for="imagen">Seleccionar URL de la Imagen:</label>
+                <select name="imagen" id="imagen" 
+                    class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
+                    <option value="">-- Elige una URL --</option>
+                        @foreach($urlsImagen as $url)
+                            {{-- El valor y el texto visible son la URL --}}
+                            <option value="{{ $url }}">{{ $url }}</option>
+                        @endforeach
+                </select>
+
+                @error('imagen')
+                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
             {{-- Botón de enviar --}}

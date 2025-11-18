@@ -18,6 +18,10 @@
                 <p class="text-beige-tostado font-bold">${{ number_format($item->producto->precio, 2) }}</p>
                 <p class="text-marron-chocolate">Cantidad: {{ $item->cantidad }}</p>
 
+                <p class="text-marron-chocolate">
+                    Subtotal: {{ number_format($item->producto->precio * $item->cantidad, 2) }}
+                </p>
+
                 <form action="{{ route('carrito.eliminar', $item->id) }}" method="POST" class="inline">
                     @csrf
                     @method('DELETE')
@@ -25,9 +29,18 @@
                 </form>
             </div>
         </div>
-    @empty
+
+        @empty
         <p class="text-center text-gray-500 mt-6">Tu carrito está vacío 😢</p>
+
     @endforelse
+
+    {{-- Fuera del bucle mostrar el total final --}}
+    <div class="text-right">
+        <p class="text-marron-chocolate">
+            TOTAL: <strong>{{ number_format($total, 2) }} €</strong>
+        </p>
+    </div>
 
     <!-- Botón Finalizar compra -->
     <div class="text-right mt-6">

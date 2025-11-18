@@ -20,10 +20,10 @@ class CarritoController extends Controller
                         ->first();
 
         if ($item) {
-            //Ya existe → aumentar cantidad
+            //Ya existe: aumentar cantidad
             $item->increment('cantidad');
         } else {
-            //No existe → agregar nuevo
+            //No existe: agregar nuevo
             Carrito::create([
                 'user_id' => $user_id,
                 'producto_id' => $id,
@@ -40,7 +40,14 @@ class CarritoController extends Controller
             ->where('user_id', Auth::id())
             ->get();
 
-        return view('carrito.index', compact('items'));
+        //Calcular el total del carrito
+        $total = $items->sum(function ($item) {
+            //Multiplica el precio del producto por la cantidad de ese item
+            return $item->producto->precio * $item->cantidad;
+        });
+
+        //Pasar tanto los items como el total a la vista
+        return view('carrito.index', compact('items', 'total'));
     }
 
     public function destroy($id)

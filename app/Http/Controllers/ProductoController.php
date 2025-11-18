@@ -46,11 +46,18 @@ class ProductoController extends Controller
     //Redirecciona a una vista de create para mostrar el formulario para crear un producto
     public function create()
     {
+        //Obtener una lista de URLs de imágenes ya utilizadas en la BD
+        $urlsImagen = DB::table('productos')
+                            ->select('imagen')
+                            ->distinct() //Asegura que cada URL aparezca solo una vez
+                            ->whereNotNull('imagen') // Ignorar productos sin imagen
+                            ->pluck('imagen'); //Obtener solo los valores del campo 'imagen'
+
         //Trae todos los usuarios de la base de datos
         $users = User::all();
 
         //Pasa la variable $users a la vista
-        return view('productos.create', compact('users'));
+        return view('productos.create', compact('users', 'urlsImagen'));
     }
 
     //Guardar un producto en la base de datos
@@ -76,6 +83,7 @@ class ProductoController extends Controller
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
             'cantidad'=>$request->cantidad,
+            'imagen'=>$request->imagen
         ]);
 
         //redirección
@@ -113,6 +121,7 @@ class ProductoController extends Controller
         ]);
 
         $producto=Producto::findOrFail($id);
+
         $producto->update([
             'nombre'=> $request->nombre,
             'descripcion'=>$request->descripcion,
