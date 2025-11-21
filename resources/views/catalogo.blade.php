@@ -72,9 +72,8 @@
         </div>
     </section>
 
-    <footer class="bg-marron-chocolate text-beige-tostado text-center py-6 mt-10">
-        <p class="text-sm">© 2025 Vinyls Vintage — Todos los derechos reservados.</p>
-    </footer>
+    <!-- Incluir Pie de página -->
+    @include('pie.footer')
 
 </body>
 </html>
