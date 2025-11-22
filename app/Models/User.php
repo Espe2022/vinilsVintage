@@ -53,7 +53,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Relación: Un usuario tiene muchos productos (1:N)
+     * Relación: Un usuario puede tener muchos productos (1:N)
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
