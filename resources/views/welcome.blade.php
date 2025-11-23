@@ -11,7 +11,7 @@
 
 <body class="bg-crema-suave text-marron-chocolate">
     <!-- Barra superior -->
-    <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-end items-center shadow-md">
+    <!-- <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-end items-center shadow-md">
             <nav class="flex items-center space-x-6">
                 <a href="http://127.0.0.1:8000/login" class="font-medium hover:bg-oro-antiguo transition">
                 Log in
@@ -21,7 +21,7 @@
                     Register
                 </a>
             </nav>
-    </div>
+    </div> -->
 
     <!-- Encabezado -->
     <header class="bg-marron-chocolate text-white text-center py-10 shadow-lg">
