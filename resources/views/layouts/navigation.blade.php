@@ -15,21 +15,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos')">
-                        Productos
-                    </x-nav-link>
-                    <x-nav-link :href="route('catalogo')" :active="request()->routeIs('catalogo')">
-                        {{ __('Catálogo') }}
-                    </x-nav-link>
 
-                    <!-- Solo para admin, el botón “Administrar Discos” apunta al CRUD -->
+                    <!-- Solo para admin, el botón “Productos” apunta al CRUD -->
                     @auth
                         @if (Auth::user()->role === 'admin')
                             <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
-                                {{ __('Administrar Discos') }}
+                            Productos    
                             </x-nav-link>
                         @endif
                     @endauth
+
+                    <x-nav-link :href="route('catalogo')" :active="request()->routeIs('catalogo')">
+                        {{ __('Catálogo') }}
+                    </x-nav-link>
                 </div>
             </div>
 
