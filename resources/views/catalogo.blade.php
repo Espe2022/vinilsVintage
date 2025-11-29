@@ -6,6 +6,7 @@
     <title>Catálogo de Vinilos - Vinyls Vintage</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-crema-suave text-marron-chocolate">
 
     <!-- Barra superior -->
@@ -15,6 +16,13 @@
             <a href="/" class="text-beige-tostado font-medium hover:bg-oro-antiguo transition">Inicio</a>
             <a href="{{ route('login') }}" class="text-beige-tostado font-medium  hover:bg-oro-antiguo transition">Login</a>
             <a href="{{ route('register') }}" class="text-beige-tostado font-medium  hover:bg-oro-antiguo transition">Register</a>
+
+            <!-- Mensaje de éxito REPASARLO-->   
+            @if (session('success'))
+                <div class="mb-4 p-4 rounded-md bg-green-600 text-white">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <!-- Botón Ver Carrito (solo para usuarios autenticados) -->
             @auth

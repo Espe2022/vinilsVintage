@@ -11,36 +11,23 @@
         <form action="/productos" method="POST">
             @csrf   <!--Formulario protegido-->
 
-            {{-- Usuario al que va destinado --}}
+            {{-- Nombre del producto --}}
             <div class="mb-4">
-                <label for="user_id" class="block text-sm font-medium text-marron-chocolate">Usuario</label>
-                <select name="user_id" id="user_id"
+                <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
+                <select name="nombre" id="nombre"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona un usuario</option>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                {{ $user->name }}
+                    <option value="">Selecciona un producto</option>
+                        @foreach ($productos as $producto)
+                            <option value="{{ $producto->nombre }}" {{ old('producto_nombre') == $producto->nombre ? 'selected' : '' }}>
+                                {{ $producto->nombre }}
                             </option>
                         @endforeach
                 </select>
                 
-                @error('user_id')
+                @error('nombre')
                     <span class="text-sm text-red-600">{{ $message }}</span>
                 @enderror
-            </div>
 
-            {{-- Nombre del producto --}}
-            <div class="mb-4">
-                <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
-                <input type="text" name="nombre" id="nombre" 
-                       class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm
-                       sm:text-sm"
-                       placeholder="Ejemplo: Boleros" value="{{old('nombre')}}" required>
-                       {{-- Validar formulario por parte del usuario y renderizar un posible error.
-                        Value sirve, por si hay un error, que no desaparezcan los datos introducidos --}}
-                       @error('nombre')
-                            <span class="text-sm text-red-600">{{$message}}</span>
-                       @enderror
             </div>
 
             {{-- Descripción --}}

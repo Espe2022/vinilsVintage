@@ -54,6 +54,8 @@ class CarritoController extends Controller
     {
         $item = Carrito::findOrFail($id);
         $item->delete();
+
+        //Redirección
         return redirect()->back()->with('success', 'Producto eliminado del carrito 🗑️');
     }
 

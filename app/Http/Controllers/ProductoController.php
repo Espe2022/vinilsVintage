@@ -6,7 +6,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\User; 
+use App\Models\User;
 
 class ProductoController extends Controller
 {
@@ -14,12 +14,7 @@ class ProductoController extends Controller
     
     //Consulta la base de datos y muestra los productos a través de la vista
     public function index(){
-        //Consulta a la bd a nuestra tabla productos
-        //$productos=Producto::where('user_id', Auth::id())->get();  //Comparar ambos id, el del user_id y el id del usuario autenticado, y conseguir los productos de dicho ausuario
-        //Retorna la vista de Productos/index.blade.php y pasar la información de la variable $productos (sin el $) con el método compact
-        //return view('productos.index', compact('productos'));
-
-        //Es privado para usuarios autenticados
+        //Consulta a la bd a nuestra tabla productos. Es privado para usuarios autenticados
         $productos=Producto::where('user_id', Auth::id())->paginate(5); //5 productos por página
         return view('productos.index', compact('productos'));
     }
@@ -53,11 +48,12 @@ class ProductoController extends Controller
                             ->whereNotNull('imagen') // Ignorar productos sin imagen
                             ->pluck('imagen'); //Obtener solo los valores del campo 'imagen'
 
-        //Trae todos los usuarios de la base de datos
+        //Trae todos los usuarios y productos de la base de datos
         $users = User::all();
+        $productos = Producto::all();  
 
-        //Pasa la variable $users a la vista
-        return view('productos.create', compact('users', 'urlsImagen'));
+        //Pasa la variable $productos a la vista
+        return view('productos.create', compact('productos', 'urlsImagen'));
     }
 
     //Guardar un producto en la base de datos
@@ -86,7 +82,7 @@ class ProductoController extends Controller
             'imagen'=>$request->imagen
         ]);
 
-        //redirección
+        //Redirección
         return redirect()->route('productos.index')->with('success', '¡Producto creado con éxito!');
     }
 
