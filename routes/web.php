@@ -14,11 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// //Sólo muestra el dashboard si está autenticado y verificado
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-//La función para devolver la vista desaparece y usamos el controlador DashboardController que es una clase
+//Sólo muestra el dashboard si está autenticado y verificado, usamos el controlador DashboardController que es una clase
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //Acceder a Ver Catálogo (todos los productos)

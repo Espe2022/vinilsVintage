@@ -41,19 +41,12 @@ class ProductoController extends Controller
     //Redirecciona a una vista de create para mostrar el formulario para crear un producto
     public function create()
     {
-        //Obtener una lista de URLs de imágenes ya utilizadas en la BD
-        $urlsImagen = DB::table('productos')
-                            ->select('imagen')
-                            ->distinct() //Asegura que cada URL aparezca solo una vez
-                            ->whereNotNull('imagen') // Ignorar productos sin imagen
-                            ->pluck('imagen'); //Obtener solo los valores del campo 'imagen'
-
         //Trae todos los usuarios y productos de la base de datos
         $users = User::all();
         $productos = Producto::all();  
 
         //Pasa la variable $productos a la vista
-        return view('productos.create', compact('productos', 'urlsImagen'));
+        return view('productos.create', compact('productos'));
     }
 
     //Guardar un producto en la base de datos
@@ -82,20 +75,21 @@ class ProductoController extends Controller
             'imagen'=>$request->imagen
         ]);
 
-        //Redirección
+        //Redirigir a la lista principal (index) con mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto creado con éxito!');
     }
 
     //Buscar en la base de datos un producto por su id y se muestra en una vista
     public function show($id){
-        //Mostrar un producto específico
-        $producto=Producto::where('id', $id)->first();
+        //Mostrar un producto específico por su ID, sino lo encuentra, Laravel devuelve automáticamente una página 404
+        $producto=Producto::findOrFail($id);
         return view('productos.show', compact('producto'));
     }
 
     //Buscar en la base de datos un producto por su id y mandarlo a un formulario
     public function edit($id){
         $producto=Producto::findOrFail($id);
+
         return view('productos.edit', compact('producto'));
     }
 
@@ -125,8 +119,8 @@ class ProductoController extends Controller
             'cantidad'=>$request->cantidad,
         ]);
 
-        //Redirigir a la lista principal (index)
-        return redirect()->route('productos.index');
+        //Redirigir a la lista principal (index) con mensaje de éxito
+        return redirect()->route('productos.index')->with('success', '¡Producto actualizado con éxito!');
     }
 
     //Eliminar un producto por su id
@@ -134,6 +128,8 @@ class ProductoController extends Controller
         //Lógica para eliminar
         $producto=Producto::findOrFail($id);
         $producto->delete();
-        return redirect()->route('productos.index');
+
+        //Redirigir a la lista principal (index) con mensaje de éxito
+        return redirect()->route('productos.index')->with('success', '¡Producto eliminado con éxito!');
     }
 }
