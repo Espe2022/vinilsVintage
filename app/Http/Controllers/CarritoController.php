@@ -31,6 +31,8 @@ class CarritoController extends Controller
             ]);
         }
 
+        
+        //Redirección y mensaje de éxito con (session('success'))
         return redirect()->route('catalogo')->with('success', 'Vinilo añadido al carrito 🛒');
     }
 
@@ -55,7 +57,7 @@ class CarritoController extends Controller
         $item = Carrito::findOrFail($id);
         $item->delete();
 
-        //Redirección
+        //Redirección y mensaje de éxito con (session('success'))
         return redirect()->back()->with('success', 'Producto eliminado del carrito 🗑️');
     }
 

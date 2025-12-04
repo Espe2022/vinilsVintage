@@ -17,9 +17,9 @@
             <a href="{{ route('login') }}" class="text-beige-tostado font-medium  hover:bg-oro-antiguo transition">Login</a>
             <a href="{{ route('register') }}" class="text-beige-tostado font-medium  hover:bg-oro-antiguo transition">Register</a>
 
-            <!-- Mensaje de éxito REPASARLO-->   
+            <!-- Mensaje de éxito -->   
             @if (session('success'))
-                <div class="mb-4 p-4 rounded-md bg-green-600 text-white">
+                <div class="mb-4 p-4 rounded-md bg-oro-antiguo text-marron-chocolate font-semibold shadow-md">
                     {{ session('success') }}
                 </div>
             @endif
