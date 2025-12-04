@@ -11,6 +11,45 @@
         <form action="/productos" method="POST">
             @csrf   <!--Formulario protegido-->
 
+            {{-- Categoría del producto --}}
+            <div class="mb-4">
+                <label for="categoria" class="block text-sm font-medium text-marron-chocolate">Categoría:</label>
+                <!-- <select name="categoria" id="categoria" class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Blues">Blues</option>
+                    <option value="Romantica latinoamericana">Romantica latinoamericana</option>
+                    <option value="Regueton">Regueton</option>
+                    <option value="Soul">Soul</option>
+                    <option value="Rancheras">Rancheras</option>
+                    <option value="Latino">Latino</option>
+                </select> -->
+
+                <!-- Array de categorías -->
+                @php
+                    $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino'];
+                @endphp
+
+                <select name="categoria" id="categoria"
+                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm"
+                        required>
+                    <option value="">Selecciona una categoría</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria }}" {{ old('categoria') == $categoria ? 'selected' : '' }}>
+                            {{ $categoria }}
+                        </option>
+                    @endforeach
+                </select>
+
+                {{-- Mensaje de error --}}
+                {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
+                @error('nombre')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+
             {{-- Nombre del producto --}}
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
