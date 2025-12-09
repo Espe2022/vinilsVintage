@@ -95,9 +95,7 @@
                 {{ $productos->links() }}
             @endif
         </div>
-        <!-- <div class="mt-10">
-            {{ $productos->links() }}
-        </div> -->
+        
     </section>
 
     <!-- Incluir Pie de página -->
