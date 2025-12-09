@@ -10,18 +10,24 @@
 </head>
 
 <body class="bg-crema-suave text-marron-chocolate">
-    <!-- Barra superior -->
-    <!-- <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-end items-center shadow-md">
-            <nav class="flex items-center space-x-6">
-                <a href="http://127.0.0.1:8000/login" class="font-medium hover:bg-oro-antiguo transition">
-                Log in
-                </a>
+    <!-- Barra superior con buscador -->
+    <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-end items-center shadow-md">
+        
+        <!-- Buscador utilizando un formulario-->
+        <form action="{{ route('productos.buscar') }}" method="GET" class="relative">
+            <input type="text" name="buscar"
+                placeholder="Buscar por categoría o nombre"
+                value="{{ request('buscar') }}"
+                class="px-4 py-2 rounded-full bg-crema-suave text-marron-chocolate placeholder-beige-tostado 
+                border border-marron-chocolate focus:border-oro-antiguo focus:ring-2 focus:ring-oro-antiguo 
+                transition w-64">
 
-                <a href="http://127.0.0.1:8000/register" class="font-medium hover:bg-oro-antiguo transition">
-                    Register
-                </a>
-            </nav>
-    </div> -->
+            <!-- Icono lupa -->
+            <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-marron-chocolate">
+                🔍
+            </button>
+        </form>
+    </div>
 
     <!-- Encabezado -->
     <header class="bg-marron-chocolate text-white text-center py-10 shadow-lg">

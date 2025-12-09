@@ -21,9 +21,7 @@ class ProductoController extends Controller
 
     public function catalogo()
     {
-        //Obtener todos los productos disponibles para mostrar al público (es público)
-        //$productos = Producto::paginate(4);
-        //Mostrar cada vinilo solo una vez (aunque existan varios con el mismo nombre)
+        //Mostrar catálogo general
         $productos = DB::table('productos')
             ->select(
                 DB::raw('MIN(id) as id'),
@@ -121,6 +119,27 @@ class ProductoController extends Controller
 
         //Redirigir a la lista principal (index) con mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto actualizado con éxito!');
+    }
+
+    //Buscar discos por género, cantante o título
+    public function buscar(Request $request)
+    {
+        $buscar = $request->input('buscar');
+
+        //Si no se escribió nada en el buscador, vuelve al catálogo normal
+        if (!$buscar) {
+            return redirect()->route('catalogo');
+        }
+
+        //Buscar por categoria o nombre
+        $productos = Producto::where('categoria', 'LIKE', "%$buscar%")
+                            ->orWhere('nombre', 'LIKE', "%$buscar%")
+                            ->paginate(4); 
+
+        //Mantener la búsqueda en la paginación
+        $productos->appends(['buscar' => $buscar]);
+
+        return view('catalogo', compact('productos', 'buscar'));
     }
 
     //Eliminar un producto por su id

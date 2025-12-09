@@ -38,6 +38,19 @@
     <section class="max-w-7xl mx-auto p-10">
         <h2 class="text-4xl font-extrabold text-center mb-10">🎶 Catálogo de Vinilos</h2>
 
+        {{-- Mostrar texto de búsqueda --}}
+        @if(!empty($buscar))
+            <h3 class="text-2xl text-center mb-6 text-oro-antiguo">
+                Resultados para: <strong>{{ $buscar }}</strong>
+            </h3>
+
+            @if($productos->isEmpty())
+                <p class="text-center text-marron-chocolate text-xl mb-10">
+                    No se encontraron resultados para "{{ $buscar }}".
+                </p>
+            @endif
+        @endif
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach ($productos as $producto)
                 <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4 flex flex-col items-center">
@@ -76,8 +89,15 @@
 
         <!-- Sirve para mostrar la paginación (los botones “Anterior / Siguiente” o “1 2 3 …”) -->
         <div class="mt-10">
-            {{ $productos->links() }}
+            @if(!empty($buscar))
+                {{ $productos->appends(['buscar' => $buscar])->links() }}
+            @else
+                {{ $productos->links() }}
+            @endif
         </div>
+        <!-- <div class="mt-10">
+            {{ $productos->links() }}
+        </div> -->
     </section>
 
     <!-- Incluir Pie de página -->

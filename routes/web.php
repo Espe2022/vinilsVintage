@@ -45,4 +45,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::resource('productos', ProductoController::class);
 });
 
+//Ruta para búsqueda de discos por género o nombre del cantante
+Route::get('/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+
 require __DIR__.'/auth.php';
