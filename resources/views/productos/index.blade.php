@@ -41,12 +41,13 @@
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->descripcion }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->precio }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->cantidad }}</td>
-                                <!-- Stock con mensaje y botón de añadir al carrito -->
-                                @if($producto->stock > 0)
-                                    <p class="text-marron-chocolate font-medium mb-4">Stock disponible: {{ $producto->stock }}</p>
-                                @else
-                                    <p class="text-oro-antiguo font-bold mb-4">Agotado</p>
-                                @endif
+                                <td class="border border-marron-chocolate px-4 py-2">
+                                    @if($producto->stock > 0)
+                                        <p class="text-marron-chocolate font-medium mb-4">{{ $producto->stock }}</p>
+                                    @else
+                                        <p class="text-oro-antiguo font-bold mb-4">Agotado</p>
+                                    @endif
+                                </td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->user->name ?? 'Sin asignar' }}</td> {{-- Nombre del creador --}}
                                 <td class="border border-marron-chocolate px-4 py-2"><a href="{{ route('productos.show', $producto->id) }}">
                                     <ion-icon name="eye" class="text-marron-chocolate text-3xl"></ion-icon>

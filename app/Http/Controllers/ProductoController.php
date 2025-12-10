@@ -97,7 +97,8 @@ class ProductoController extends Controller
     }
 
     //Actualizar un producto por su id
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         //Lógica para actualizar
 
         //Validar los campos del formulario por parte del servidor
@@ -107,8 +108,7 @@ class ProductoController extends Controller
             'precio'=>'required|numeric|min:1',
             'cantidad'=>'required|integer|min:1',
             'categoria'=>'required|string',
-            'stock'=>'required|integer|min:1',
-            'imagen'=>'required|url'
+            'stock'=>'required|integer|min:0',
         ],[
             //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
             'cantidad.required'=>'La cantidad es obligatoria',
@@ -116,19 +116,20 @@ class ProductoController extends Controller
             'cantidad.min'=>'La cantidad no puede ser menor de 1',
         ]);
 
+        //Buscar el producto en la base de datos
         $producto=Producto::findOrFail($id);
 
+        //Actualizar el producto con los datos del formulario
         $producto->update([
             'nombre'=> $request->nombre,
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
             'cantidad'=>$request->cantidad,
-            'imagen'=>$request->imagen,
             'categoria'=>$request->categoria,
             'stock'=>$request->stock
         ]);
 
-        //Redirigir a la lista principal (index) con mensaje de éxito
+        //Redirigir al listado de productos (index) con mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto actualizado con éxito!');
     }
 

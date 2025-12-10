@@ -12,6 +12,28 @@
             @csrf   <!--Formulario protegido-->
             @method('PUT')
 
+            {{-- Categoría --}}
+            <div class="mb-4">
+                <label for="categoria" class="block text-sm font-medium text-marron-chocolate">Categoría:</label>
+                @php
+                    $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino'];
+                @endphp
+                
+                <select name="categoria" id="categoria"
+                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm"
+                        required>
+                    <option value="">Selecciona una categoría</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria }}" {{ old('categoria', $producto->categoria) == $categoria ? 'selected' : '' }}>
+                            {{ $categoria }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('categoria')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+
             {{-- Nombre del producto --}}
             <div class="mb-4 bg-beige-crema">
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
@@ -69,7 +91,7 @@
             <div class="mb-4">
                 <label for="stock" class="block text-sm font-medium text-marron-chocolate">Stock</label>
                 <input type="number" name="stock" id="stock" step="1" min="1" 
-                       value="{{old('stock')}}"
+                       value="{{ old('stock') ?? $producto->stock }}"
                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate shadow-sm
                        focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
                        placeholder="Ejemplo: 20" required
