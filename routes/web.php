@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     //Destroy elimina el producto del carrito
     Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'destroy'])->name('carrito.eliminar');
 
+    //Actualizar cantidad de un producto en el carrito
+    Route::put('/carrito/actualizar/{id}', [CarritoController::class, 'update'])->name('carrito.update');
+
     //Finalizar compras
     Route::post('/comprar', [CompraController::class, 'comprar'])->name('comprar');
 });

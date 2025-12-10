@@ -28,6 +28,7 @@
                             <th class="border border-marron-chocolate px-4 py-2">Descripción</th>
                             <th class="border border-marron-chocolate px-4 py-2">Precio</th>
                             <th class="border border-marron-chocolate px-4 py-2">Cantidad</th>
+                            <th class="border border-marron-chocolate px-4 py-2">Stock</th>
                             <th class="border border-marron-chocolate px-4 py-2">Creado por</th>
                             <th class="border border-marron-chocolate px-4 py-2">Ver</th>
                             <th class="border border-marron-chocolate px-4 py-2">Actualizar</th>
@@ -43,14 +44,8 @@
                                 <!-- Stock con mensaje y botón de añadir al carrito -->
                                 @if($producto->stock > 0)
                                     <p class="text-marron-chocolate font-medium mb-4">Stock disponible: {{ $producto->stock }}</p>
-                                    <button class="bg-marron-chocolate hover:bg-oro-antiguo text-beige-tostado font-bold py-2 px-4 rounded mb-4">
-                                        Añadir al carrito
-                                    </button>
                                 @else
                                     <p class="text-oro-antiguo font-bold mb-4">Agotado</p>
-                                    <button class="bg-beige-crema text-marron-chocolate font-bold py-2 px-4 rounded mb-4 cursor-not-allowed" disabled>
-                                        Añadir al carrito
-                                    </button>
                                 @endif
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->user->name ?? 'Sin asignar' }}</td> {{-- Nombre del creador --}}
                                 <td class="border border-marron-chocolate px-4 py-2"><a href="{{ route('productos.show', $producto->id) }}">
@@ -77,4 +72,7 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluir Pie de página -->
+    @include('pie.footer')
 </x-app-layout>

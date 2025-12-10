@@ -56,6 +56,9 @@ class ProductoController extends Controller
             'descripcion'=>'nullable|string',
             'precio'=>'required|numeric|min:1',
             'cantidad'=>'required|integer|min:1',
+            'categoria'=>'required|string',
+            'stock'=>'required|integer|min:1',
+            'imagen'=>'required|url',
         ],[
             //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
             'cantidad.required'=>'La cantidad es obligatoria',
@@ -70,7 +73,9 @@ class ProductoController extends Controller
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
             'cantidad'=>$request->cantidad,
-            'imagen'=>$request->imagen
+            'imagen'=>$request->imagen,
+            'categoria'=>$request->categoria,
+            'stock'=>$request->stock
         ]);
 
         //Redirigir a la lista principal (index) con mensaje de éxito
@@ -101,6 +106,9 @@ class ProductoController extends Controller
             'descripcion'=>'nullable|string',
             'precio'=>'required|numeric|min:1',
             'cantidad'=>'required|integer|min:1',
+            'categoria'=>'required|string',
+            'stock'=>'required|integer|min:1',
+            'imagen'=>'required|url'
         ],[
             //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
             'cantidad.required'=>'La cantidad es obligatoria',
@@ -115,6 +123,9 @@ class ProductoController extends Controller
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
             'cantidad'=>$request->cantidad,
+            'imagen'=>$request->imagen,
+            'categoria'=>$request->categoria,
+            'stock'=>$request->stock
         ]);
 
         //Redirigir a la lista principal (index) con mensaje de éxito

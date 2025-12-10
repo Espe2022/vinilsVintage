@@ -14,19 +14,6 @@
             {{-- Categoría del producto --}}
             <div class="mb-4">
                 <label for="categoria" class="block text-sm font-medium text-marron-chocolate">Categoría:</label>
-                <!-- <select name="categoria" id="categoria" class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona una categoría</option>
-                    <option value="Rock">Rock</option>
-                    <option value="Pop">Pop</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Blues">Blues</option>
-                    <option value="Romantica latinoamericana">Romantica latinoamericana</option>
-                    <option value="Regueton">Regueton</option>
-                    <option value="Soul">Soul</option>
-                    <option value="Rancheras">Rancheras</option>
-                    <option value="Latino">Latino</option>
-                </select> -->
-
                 <!-- Array de categorías -->
                 @php
                     $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino'];
@@ -53,15 +40,10 @@
             {{-- Nombre del producto --}}
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
-                <select name="nombre" id="nombre"
+                <input type="text" name="nombre" id="nombre"
+                        value="{{ old('nombre') }}"
+                        placeholder="Escribe el nombre del vinilo"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona un producto</option>
-                        @foreach ($productos as $producto)
-                            <option value="{{ $producto->nombre }}" {{ old('nombre') == $producto->nombre ? 'selected' : '' }}>
-                                {{ $producto->nombre }}
-                            </option>
-                        @endforeach
-                </select>
                 
                 {{-- Mensaje de error --}}
                 {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
@@ -73,16 +55,10 @@
             {{-- Descripción --}}
             <div class="mb-4">
                 <label for="descripcion" class="block text-sm font-medium text-marron-chocolate">Descripción</label>
-                <select name="descripcion" id="descripcion"
-                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona una descripción</option>
-                        @foreach ($productos as $producto)
-                            <option value="{{ $producto->descripcion }}" {{ old('descripcion') == $producto->descripcion ? 'selected' : '' }}>
-                                {{ $producto->descripcion }}
-                            </option>
-                        @endforeach
-                </select>
-                
+                <textarea name="descripcion" id="descripcion" rows="3"
+                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
+                        placeholder="Descripción del vinilo"
+                        required>{{ old('descripcion') }}</textarea>
                 
                 {{-- Mensaje de error --}}
                 {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
@@ -94,15 +70,10 @@
             {{-- Precio --}}
             <div class="mb-4">
                 <label for="precio" class="block text-sm font-medium text-marron-chocolate">Precio</label>
-                <select name="precio" id="precio"
-                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona un precio</option>
-                        @foreach ($productos as $producto)
-                            <option value="{{ $producto->precio }}" {{ old('precio') == $producto->precio ? 'selected' : '' }}>
-                                {{ $producto->precio }}
-                            </option>
-                        @endforeach
-                </select>
+                <input type="number" name="precio" id="precio" step="0.01" min="0"
+                       value="{{ old('precio') }}"
+                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
+                        placeholder="Ejemplo: 29.99" required>
 
                 {{-- Mensaje de error --}}
                 {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
@@ -115,10 +86,11 @@
             <div class="mb-4">
                 <label for="cantidad" class="block text-sm font-medium text-marron-chocolate">Cantidad</label>
                 <input type="number" name="cantidad" id="cantidad" step="1" min="1" 
+                       value="{{old('cantidad')}}"
                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate shadow-sm
                        focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
-                       placeholder="Ejemplo: 20" value="{{old('cantidad')}}" required
-                       oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                       placeholder="Ejemplo: 20" required
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '');">   <!-- Patrón para admitir en Cantidad sólo números del 0 al 9 -->
                        
                 {{-- Mensaje de error --}}
                 {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
@@ -127,19 +99,31 @@
                 @enderror
             </div>
 
-            {{-- Elegir la imagen de la BD --}}
+            {{-- Stock --}}
+            <div class="mb-4">
+                <label for="stock" class="block text-sm font-medium text-marron-chocolate">Stock</label>
+                <input type="number" name="stock" id="stock" step="1" min="1" 
+                       value="{{old('stock')}}"
+                       class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate shadow-sm
+                       focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
+                       placeholder="Ejemplo: 20" required
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '');">   <!-- Patrón para admitir en Cantidad sólo números del 0 al 9 -->
+                       
+                {{-- Mensaje de error --}}
+                {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
+                @error('stock')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+
+            {{-- Elegir la url de la imagen del disco --}}
             <div class="mb-4">
                 <label for="imagen">Seleccionar URL de la Imagen</label>
-                <select name="imagen" id="imagen"
-                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" required>
-                    <option value="">Selecciona una url de la imagen</option>
-                        @foreach ($productos as $producto)
-                            <option value="{{ $producto->imagen }}" {{ old('imagen') == $producto->imagen ? 'selected' : '' }}>
-                                {{ $producto->imagen }}
-                            </option>
-                        @endforeach
-                </select>
-                
+                <input type="url" name="imagen" id="imagen"
+                       value="{{ old('imagen') }}"
+                       class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
+                       placeholder="Ejemplo: https://upload.wikimedia.org/wikipedia/en/1/15/Whitney_Houston_-_Whitney.png" required>
+
                 {{-- Mensaje de error --}}
                 {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
                 @error('imagen')
@@ -156,4 +140,7 @@
             </div>
         </form>
     </div>
+
+    <!-- Incluir Pie de página -->
+    @include('pie.footer')
 </x-app-layout>

@@ -31,7 +31,6 @@ class CarritoController extends Controller
             ]);
         }
 
-        
         //Redirección y mensaje de éxito con (session('success'))
         return redirect()->route('catalogo')->with('success', 'Vinilo añadido al carrito 🛒');
     }
@@ -50,6 +49,47 @@ class CarritoController extends Controller
 
         //Pasar tanto los items como el total a la vista
         return view('carrito.index', compact('items', 'total'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        //Buscar el item del carrito
+        $item = Carrito::findOrFail($id);
+        $producto = $item->producto;
+
+        //Nueva cantidad enviada desde el select/input
+        $nuevaCantidad = (int)$request->input('cantidad');
+
+        //Eliminar el item si se selecciona 0
+        if ($nuevaCantidad === 0) 
+        {
+        return $this->destroy($id);
+        }
+
+        // if ($nuevaCantidad < 1) {
+        //     return redirect()->back()->with('error', 'La cantidad debe ser al menos 1.');
+        // }
+
+        if ($nuevaCantidad > $item->cantidad) 
+        {
+            //El usuario quiere más unidades
+            $diferencia = $nuevaCantidad - $item->cantidad;
+            if ($producto->stock < $diferencia) {
+                return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
+            }
+            $producto->stock -= $diferencia;
+        } else {
+            //El usuario reduce unidades
+            $diferencia = $item->cantidad - $nuevaCantidad;
+            $producto->stock += $diferencia;
+        }
+
+        //Guardar cambios
+        $producto->save();
+        $item->cantidad = $nuevaCantidad;
+        $item->save();
+
+        return redirect()->back()->with('success', 'Cantidad actualizada correctamente.');
     }
 
     public function destroy($id)

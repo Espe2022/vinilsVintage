@@ -65,6 +65,23 @@
                     @enderror
             </div>
 
+            {{-- Stock --}}
+            <div class="mb-4">
+                <label for="stock" class="block text-sm font-medium text-marron-chocolate">Stock</label>
+                <input type="number" name="stock" id="stock" step="1" min="1" 
+                       value="{{old('stock')}}"
+                       class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate shadow-sm
+                       focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
+                       placeholder="Ejemplo: 20" required
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '');">   <!-- Patrón para admitir en Cantidad sólo números del 0 al 9 -->
+                       
+                {{-- Mensaje de error --}}
+                {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
+                @error('stock')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+
             {{-- Botón de enviar --}}
             <div class="flex justify-end">
                 <button type="submit" 
@@ -74,4 +91,7 @@
             </div>
         </form>
     </div>
+
+    <!-- Incluir Pie de página -->
+    @include('pie.footer')
 </x-app-layout>
