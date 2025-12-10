@@ -13,6 +13,19 @@
                     <p class="font-light text-lg">{{ $producto->descripcion }}</p>
                     <p class="text-lg">Precio: {{ $producto->precio }} €.</p>
                     <p class="text-lg">Cantidad: {{ $producto->cantidad }} u.</p>
+               
+                    <!-- Stock con mensaje y botón de añadir al carrito -->
+                    @if($producto->stock > 0)
+                        <p class="text-marron-chocolate font-medium mb-4">Stock disponible: {{ $producto->stock }}</p>
+                        <button class="bg-marron-chocolate hover:bg-oro-antiguo text-beige-tostado font-bold py-2 px-4 rounded mb-4">
+                            Añadir al carrito
+                        </button>
+                    @else
+                        <p class="text-oro-antiguo font-bold mb-4">Agotado</p>
+                        <button class="bg-beige-crema text-marron-chocolate font-bold py-2 px-4 rounded mb-4 cursor-not-allowed" disabled>
+                            Añadir al carrito
+                        </button>
+                    @endif
 
                     {{-- botón de eliminar --}}
                     <div class="flex justify-end">
