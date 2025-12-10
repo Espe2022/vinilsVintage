@@ -25,7 +25,8 @@ class Producto extends Model
         'cantidad',
         'imagen',
         'user_id',
-        'categoria'
+        'categoria',
+        'stock'
     ];
 
     /**
