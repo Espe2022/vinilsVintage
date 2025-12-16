@@ -49,4 +49,8 @@
             </x-primary-button>
         </div>
     </form>
+
 </x-guest-layout>
+
+<!-- Incluir Pie de página -->
+@include('pie.footer')

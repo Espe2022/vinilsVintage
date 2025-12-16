@@ -85,4 +85,7 @@
     @endif
 </div>
    
+<!-- Incluir Pie de página -->
+@include('pie.footer')
+
 @endsection

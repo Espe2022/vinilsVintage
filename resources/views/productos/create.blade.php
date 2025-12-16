@@ -24,7 +24,8 @@
                         required>
                     <option value="">Selecciona una categoría</option>
                     @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria }}" {{ (old('categoria', $producto->categoria) == $categoria) ? 'selected' : '' }}>
+                        <option value="{{ $categoria }}"
+                            {{ old('categoria') == $categoria ? 'selected' : '' }}>
                             {{ $categoria }}
                         </option>
                     @endforeach
