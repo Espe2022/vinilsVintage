@@ -45,14 +45,14 @@ class DashboardController extends Controller
             }
         })->filter(); // eliminamos null si algún producto no existe
 
-        // Unir productos propios y comprados
+        //Unir productos propios y comprados
         $productosCombinados = $productosPropios->concat($productosComprados);
 
-        // Preparar datos para Chart.js
+        //Preparar datos para Chart.js
         $nombres = $productosCombinados->pluck('nombre');
         $cantidades = $productosCombinados->pluck('cantidad');
 
-        // Pasar a la vista
+        //Pasar a la vista
         return view('dashboard', compact('nombres', 'cantidades', 'productosCombinados'));
 
     }

@@ -33,7 +33,7 @@
             data: {
                 labels: nombres,    //Etiquetas en el eje X (nombres de productos)
                 datasets: [{
-                    label: 'Cantidad de productos',
+                    label: 'Cantidad',
                     data: cantidades, //Datos (cantidades de productos)
                     backgroundColor: 'rgb(210, 180, 140)',
                     borderColor: 'rgb(184,134,11)',
