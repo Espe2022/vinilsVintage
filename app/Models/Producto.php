@@ -22,11 +22,10 @@ class Producto extends Model
         'nombre',
         'descripcion',
         'precio',
-        'cantidad',
         'imagen',
         'user_id',
         'categoria',
-        'stock'
+        'stock' //Sólo usar stock en productos para la lógica de inventario
     ];
 
     /**

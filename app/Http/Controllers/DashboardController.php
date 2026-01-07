@@ -20,7 +20,7 @@ class DashboardController extends Controller
             $fecha = $producto->created_at ? $producto->created_at->format('d/m/Y') : now()->format('d/m/Y');
             return [
                 'nombre' => $producto->nombre . ' (' . $fecha . ')',
-                'cantidad' => $producto->cantidad
+                'cantidad' => $producto->stock
             ];
         });
 
