@@ -47,7 +47,7 @@
     <!-- Producto 1 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg" alt="Abbey Road" class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
+            <img src="https://www.thebeatles.com/sites/default/files/styles/max_2600x2600/public/2021-06/Abbey%20Road.jpg?itok=_AGlITc8" alt="Abbey Road" class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Abbey Road</h2>
         <p class="text-oro-antiguo text-center">The Beatles</p>
