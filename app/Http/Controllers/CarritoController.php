@@ -53,44 +53,65 @@ class CarritoController extends Controller
 
     public function update(Request $request, $id)
     {
-        //Buscar el item del carrito
-        $item = Carrito::findOrFail($id);
+        //Buscar el item del carrito junto con el producto
+        $item = Carrito::with('producto')->findOrFail($id);
         $producto = $item->producto;
 
         //Nueva cantidad enviada desde el select/input
-        $nuevaCantidad = (int)$request->input('cantidad');
+        $nuevaCantidad = (int) $request->input('cantidad');
 
         //Eliminar el item si se selecciona 0
-        if ($nuevaCantidad === 0) 
-        {
-        return $this->destroy($id);
+        if ($nuevaCantidad === 0) {
+            return $this->destroy($id);
         }
 
-        // if ($nuevaCantidad < 1) {
-        //     return redirect()->back()->with('error', 'La cantidad debe ser al menos 1.');
-        // }
-
-        if ($nuevaCantidad > $item->cantidad) 
-        {
-            //El usuario quiere más unidades
-            $diferencia = $nuevaCantidad - $item->cantidad;
-            if ($producto->stock < $diferencia) {
-                return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
-            }
-            $producto->stock -= $diferencia;
-        } else {
-            //El usuario reduce unidades
-            $diferencia = $item->cantidad - $nuevaCantidad;
-            $producto->stock += $diferencia;
+        //Validar que la nueva cantidad no supere el stock disponible
+        if ($nuevaCantidad > $producto->stock) {
+            return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
         }
 
-        //Guardar cambios
-        $producto->save();
+        //Guardar cambios solo en el carrito
         $item->cantidad = $nuevaCantidad;
         $item->save();
 
         return redirect()->back()->with('success', 'Cantidad actualizada correctamente.');
     }
+
+
+        // Buscar el item del carrito
+        // $item = Carrito::findOrFail($id);
+        // $producto = $item->producto;
+
+        // Nueva cantidad enviada desde el select/input
+        // $nuevaCantidad = (int)$request->input('cantidad');
+
+        // Eliminar el item si se selecciona 0
+        // if ($nuevaCantidad === 0) 
+        // {
+        //     return $this->destroy($id);
+        // }
+
+        // if ($nuevaCantidad > $item->cantidad) 
+        // {
+        //     El usuario quiere más unidades
+        //     $diferencia = $nuevaCantidad - $item->cantidad;
+        //     if ($producto->stock < $diferencia) {
+        //         return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
+        //     }
+        //     $producto->stock -= $diferencia;
+        // } else {
+        //     El usuario reduce unidades
+        //     $diferencia = $item->cantidad - $nuevaCantidad;
+        //     $producto->stock += $diferencia;
+        // }
+
+        // Guardar cambios
+        // $producto->save();
+        // $item->cantidad = $nuevaCantidad;
+        // $item->save();
+
+        // return redirect()->back()->with('success', 'Cantidad actualizada correctamente.');
+    
 
     public function destroy($id)
     {

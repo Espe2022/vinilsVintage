@@ -25,7 +25,7 @@ class Producto extends Model
         'imagen',
         'user_id',
         'categoria',
-        'stock' //Sólo usar stock en productos para la lógica de inventario
+        'stock' 
     ];
 
     /**
