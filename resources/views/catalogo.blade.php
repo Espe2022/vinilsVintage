@@ -55,9 +55,11 @@
             @foreach ($productos as $producto)
                 <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4 flex flex-col items-center">
                     <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
+                        <!-- loading="lazy": hace que el navegador descargue la imagen sólo cuando está cerca de entrar en pantalla, lo que reduce mucho el tiempo de carga inicial si hay muchas tarjetas -->
                         <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/300x300?text=Vinilo' }}" 
-                             alt="{{ $producto->nombre }}" 
-                             class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
+                            alt="{{ $producto->nombre }}"
+                            loading="lazy" 
+                            class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
                     </div>
 
                     <h3 class="text-xl font-semibold mt-3 text-center">{{ $producto->nombre }}</h3>

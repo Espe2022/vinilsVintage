@@ -8,14 +8,13 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <!-- <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> -->
 
         <!-- Scripts -->
         <!-- La plantilla carga Tailwind CSS -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <!-- charts js es una librería opensource de javascript ayuda para hacer gráficos--> 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-beige-tostado">
@@ -41,7 +40,8 @@
                 @yield('content')
             </main>
         </div>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
+        <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     </body>
 </html>

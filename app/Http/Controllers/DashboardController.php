@@ -26,8 +26,7 @@ class DashboardController extends Controller
 
         //Productos comprados por el usuario
         $compras = ProductoComprado::where('user_id', Auth::id())
-            ->select('product_id', DB::raw('SUM(cantidad) as total'))
-            ->groupBy('product_id')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         //Transformar productos comprados en arrays
@@ -35,20 +34,21 @@ class DashboardController extends Controller
         {
             $producto = Producto::find($compra->product_id);
             if ($producto) {
-                //Si el producto tiene fecha de creación: usa esa fecha
-                //Si no tiene fecha: usa la fecha actual
-                $fecha = $producto->created_at ? $producto->created_at->format('d/m/Y') : now()->format('d/m/Y');
+                $fecha = $compra->created_at
+                    ? $compra->created_at->format('d/m/Y')
+                    : now()->format('d/m/Y');
+
                 return [
                     'nombre' => $producto->nombre . ' (' . $fecha . ')',
-                    'cantidad' => $compra->total
+                    'cantidad' => $compra->cantidad
                 ];
             }
-        })->filter(); // eliminamos null si algún producto no existe
+        })->filter(); //eliminamos null si algún producto no existe
 
         //Unir productos propios y comprados
         $productosCombinados = $productosPropios->concat($productosComprados);
 
-        //Preparar datos para Chart.js
+        //Preparar datos
         $nombres = $productosCombinados->pluck('nombre');
         $cantidades = $productosCombinados->pluck('cantidad');
 
