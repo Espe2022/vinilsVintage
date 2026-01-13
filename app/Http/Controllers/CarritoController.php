@@ -77,42 +77,6 @@ class CarritoController extends Controller
         return redirect()->back()->with('success', 'Cantidad actualizada correctamente.');
     }
 
-
-        // Buscar el item del carrito
-        // $item = Carrito::findOrFail($id);
-        // $producto = $item->producto;
-
-        // Nueva cantidad enviada desde el select/input
-        // $nuevaCantidad = (int)$request->input('cantidad');
-
-        // Eliminar el item si se selecciona 0
-        // if ($nuevaCantidad === 0) 
-        // {
-        //     return $this->destroy($id);
-        // }
-
-        // if ($nuevaCantidad > $item->cantidad) 
-        // {
-        //     El usuario quiere más unidades
-        //     $diferencia = $nuevaCantidad - $item->cantidad;
-        //     if ($producto->stock < $diferencia) {
-        //         return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
-        //     }
-        //     $producto->stock -= $diferencia;
-        // } else {
-        //     El usuario reduce unidades
-        //     $diferencia = $item->cantidad - $nuevaCantidad;
-        //     $producto->stock += $diferencia;
-        // }
-
-        // Guardar cambios
-        // $producto->save();
-        // $item->cantidad = $nuevaCantidad;
-        // $item->save();
-
-        // return redirect()->back()->with('success', 'Cantidad actualizada correctamente.');
-    
-
     public function destroy($id)
     {
         $item = Carrito::findOrFail($id);
