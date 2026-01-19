@@ -19,7 +19,7 @@
             
                 <!-- Formulario para actualizar cantidad -->
                 @php
-                    $maxCantidad = $item->producto->stock + $item->cantidad; // máximo que se puede comprar
+                    $maxCantidad = $item->producto->stock;  //Máximo que se puede comprar
                 @endphp
 
                 <form action="{{ route('carrito.update', $item->id) }}" method="POST" class="inline-block mt-1">
@@ -63,14 +63,6 @@
             TOTAL: <strong>{{ number_format($total, 2) }} €</strong>
         </p>
     </div>
-
-    <!-- Botón Finalizar compra
-    <div class="text-right mt-6">
-        <form action="{{ route('comprar') }}" method="POST">
-            @csrf
-            <button type="submit" class="bg-marron-chocolate hover:bg-oro-antiguo text-white font-semibold py-2 px-4 rounded-full transition w-full max-w-xs">Finalizar compra</button>
-        </form>
-    </div> -->
 
     <!-- Botón Finalizar compra -->
     @if($items->count() > 0)
