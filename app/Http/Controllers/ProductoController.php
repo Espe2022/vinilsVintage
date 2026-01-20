@@ -55,16 +55,16 @@ class ProductoController extends Controller
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string',
             'precio'=>'required|numeric|min:1',
-            'cantidad'=>'required|integer|min:1',
             'categoria'=>'required|string',
             'stock'=>'required|integer|min:1',
             'imagen'=>'required|url',
-        ],[
-            //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
-            'cantidad.required'=>'La cantidad es obligatoria',
-            'cantidad.integer'=>'La cantidad debe ser un número entero',
-            'cantidad.min'=>'La cantidad no puede ser menor de 1',
-        ]);
+        ],//[
+        //     //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
+        //     'cantidad.required'=>'La cantidad es obligatoria',
+        //     'cantidad.integer'=>'La cantidad debe ser un número entero',
+        //     'cantidad.min'=>'La cantidad no puede ser menor de 1',
+        // ]
+        );
 
         //Lógica para guardar un producto
         Producto::create([
@@ -72,7 +72,6 @@ class ProductoController extends Controller
             'nombre'=>$request->nombre, //El nombre es el contenido del name del formulario
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
-            'cantidad'=>$request->cantidad,
             'imagen'=>$request->imagen,
             'categoria'=>$request->categoria,
             'stock'=>$request->stock
@@ -106,15 +105,15 @@ class ProductoController extends Controller
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string',
             'precio'=>'required|numeric|min:1',
-            'cantidad'=>'required|integer|min:1',
             'categoria'=>'required|string',
             'stock'=>'required|integer|min:0',
-        ],[
-            //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
-            'cantidad.required'=>'La cantidad es obligatoria',
-            'cantidad.integer'=>'La cantidad debe ser un número entero',
-            'cantidad.min'=>'La cantidad no puede ser menor de 1',
-        ]);
+        ],//[
+        //     //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
+        //     'cantidad.required'=>'La cantidad es obligatoria',
+        //     'cantidad.integer'=>'La cantidad debe ser un número entero',
+        //     'cantidad.min'=>'La cantidad no puede ser menor de 1',
+        // ]
+        );
 
         //Buscar el producto en la base de datos
         $producto=Producto::findOrFail($id);
@@ -124,7 +123,6 @@ class ProductoController extends Controller
             'nombre'=> $request->nombre,
             'descripcion'=>$request->descripcion,
             'precio'=>$request->precio,
-            'cantidad'=>$request->cantidad,
             'categoria'=>$request->categoria,
             'stock'=>$request->stock
         ]);

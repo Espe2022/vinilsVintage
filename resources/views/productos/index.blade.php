@@ -27,7 +27,6 @@
                             <th class="border border-marron-chocolate px-4 py-2">Nombre</th>
                             <th class="border border-marron-chocolate px-4 py-2">Descripción</th>
                             <th class="border border-marron-chocolate px-4 py-2">Precio</th>
-                            <th class="border border-marron-chocolate px-4 py-2">Cantidad</th>
                             <th class="border border-marron-chocolate px-4 py-2">Stock</th>
                             <th class="border border-marron-chocolate px-4 py-2">Creado por</th>
                             <th class="border border-marron-chocolate px-4 py-2">Ver</th>
@@ -40,7 +39,6 @@
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->nombre }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->descripcion }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">{{ $producto->precio }}</td>
-                                <td class="border border-marron-chocolate px-4 py-2">{{ $producto->cantidad }}</td>
                                 <td class="border border-marron-chocolate px-4 py-2">
                                     @if($producto->stock > 0)
                                         <p class="text-marron-chocolate font-medium mb-4">{{ $producto->stock }}</p>

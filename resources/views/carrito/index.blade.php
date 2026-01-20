@@ -15,7 +15,7 @@
             </div>
 
             <div class="text-right">
-                <p class="text-beige-tostado font-bold">${{ number_format($item->producto->precio, 2) }}</p>
+                <p class="text-beige-tostado font-bold">{{ number_format($item->producto->precio, 2) }} €</p>
             
                 <!-- Formulario para actualizar cantidad -->
                 @php

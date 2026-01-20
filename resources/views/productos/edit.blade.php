@@ -73,20 +73,6 @@
                     @enderror
             </div>
 
-            {{-- Cantidad --}}
-            <div class="mb-4 bg-beige-crema">
-                <label for="cantidad" class="block text-sm font-medium text-marron-chocolate">Cantidad</label>
-                <input type="number" name="cantidad" id="cantidad" step="1" min="1"
-                    value="{{ old('cantidad') ?? $producto->cantidad}}" 
-                    class="mt-1 block w-full rounded-md shadow-sm border-marron-chocolate  focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
-                    placeholder="Ejemplo: 20" required
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                    {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
-                    @error('cantidad')
-                        <span class="text-sm text-red-600">{{$message}}</span>
-                    @enderror
-            </div>
-
             {{-- Stock --}}
             <div class="mb-4">
                 <label for="stock" class="block text-sm font-medium text-marron-chocolate">Stock</label>

@@ -84,7 +84,7 @@
 
                     <h3 class="text-xl font-semibold mt-3 text-center">{{ $producto->nombre }}</h3>
                     <p class="text-oro-antiguo text-center">{{ $producto->descripcion }}</p>
-                    <p class="text-marron-chocolate font-bold mt-2 text-center">${{ number_format($producto->precio, 2) }}</p>
+                    <p class="text-marron-chocolate font-bold mt-2 text-center">{{ number_format($producto->precio, 2) }} €</p>
               
 
                     <div class="mt-4 w-full flex flex-col items-center space-y-3">

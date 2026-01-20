@@ -12,7 +12,6 @@
                     <h4 class="font-semibold text-2xl">Nombre del Producto: {{ $producto->nombre }}</h4>
                     <p class="font-light text-lg">{{ $producto->descripcion }}</p>
                     <p class="text-lg">Precio: {{ $producto->precio }} €.</p>
-                    <p class="text-lg">Cantidad: {{ $producto->cantidad }} u.</p>
                
                     <!-- Stock con mensaje -->
                     @if($producto->stock > 0)
