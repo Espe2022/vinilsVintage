@@ -65,7 +65,7 @@ class User extends Authenticatable
     /**
      * Definir la relación: Un usuario puede tener muchos productos añadidos al carrito (1:N)
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function carritos()
     {
