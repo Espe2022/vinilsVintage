@@ -81,7 +81,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductoComprado::class);
     }
-
     
     //Mutator para email: Laravel automáticamente convierte el email a minúsculas antes de guardarlo en la base de datos
     public function setEmailAttribute($value)
