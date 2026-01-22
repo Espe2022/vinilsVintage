@@ -31,7 +31,7 @@ class Producto extends Model
     /**
      * Definir la relación: Un producto pertenece a un usuario (1:1)
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
@@ -41,11 +41,20 @@ class Producto extends Model
     /**
      * Definir la relación: Un producto puede estar en varios carritos (1:N)
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function carritos()
     {
         return $this->hasMany(Carrito::class);
     }
 
+    /**
+     * Definir la relación: Un producto puede estar en varias compras (1:N)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productosComprados()
+    {
+        return $this->hasMany(ProductoComprado::class);
+    }
 }
