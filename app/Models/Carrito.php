@@ -19,7 +19,7 @@ class Carrito extends Model
     /**
      * Definir la relación: El carrito pertenece a un producto (1:1)
      * El modelo Carrito tiene una columna producto_id que apunta a la tabla productos
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function producto()
     {
@@ -29,9 +29,9 @@ class Carrito extends Model
     /**
      * Definir la relación: El carrito pertenece a un usuario (1:1)
      * Existe una columna user_id en la tabla carritos que apunta a la tabla users
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
