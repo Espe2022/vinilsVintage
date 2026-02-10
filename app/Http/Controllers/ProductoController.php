@@ -58,12 +58,7 @@ class ProductoController extends Controller
             'categoria'=>'required|string',
             'stock'=>'required|integer|min:1',
             'imagen'=>'required|url',
-        ],//[
-        //     //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
-        //     'cantidad.required'=>'La cantidad es obligatoria',
-        //     'cantidad.integer'=>'La cantidad debe ser un número entero',
-        //     'cantidad.min'=>'La cantidad no puede ser menor de 1',
-        // ]
+        ],
         );
 
         //Lógica para guardar un producto
@@ -107,12 +102,7 @@ class ProductoController extends Controller
             'precio'=>'required|numeric|min:1',
             'categoria'=>'required|string',
             'stock'=>'required|integer|min:0',
-        ],//[
-        //     //Validar los campos de cantidad requeridos para que salga un mensaje personalizado
-        //     'cantidad.required'=>'La cantidad es obligatoria',
-        //     'cantidad.integer'=>'La cantidad debe ser un número entero',
-        //     'cantidad.min'=>'La cantidad no puede ser menor de 1',
-        // ]
+        ],
         );
 
         //Buscar el producto en la base de datos
