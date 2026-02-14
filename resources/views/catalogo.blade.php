@@ -119,7 +119,7 @@
         </div>
     </section>
 
-    <!-- Incluir pie  -->
+    <!-- Pie de página reutilizable  -->
     @include('pie.footer')
 
 </body>

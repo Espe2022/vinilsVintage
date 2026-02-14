@@ -83,6 +83,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+                        {{ __('Productos') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
+            
+            <x-responsive-nav-link :href="route('catalogo')" :active="request()->routeIs('catalogo')">
+                {{ __('Catálogo') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
