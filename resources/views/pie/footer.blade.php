@@ -1,23 +1,27 @@
 <footer class="bg-marron-chocolate text-beige-tostado text-center py-6 mt-10">
-    <div class="container mx-auto flex justify-between items-center">
-        <!-- Texto de derechos -->
-        <p class="text-sm">© 2025 Vinyls Vintage — Todos los derechos reservados.</p>
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <!-- Derechos -->
+        <p class="text-sm order-2 sm:order-1">
+            © {{ date('Y') }} Vinyls Vintage — Todos los derechos reservados.
+        </p>
 
-        <!-- Iconos de redes sociales alineados a la derecha -->
-        <div class="flex justify-end space-x-4">
-            <!-- target="_blank": la tienda permanece abierta y el usuario puede visitar la red social sin perder el sitio (la página de la tienda) 
-                rel="noopener noreferrer": recomendable por seguridad cuando uso target="_blank" -->
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer" class="text-2xl hover:text-oro-antiguo transition">   
-                <img src="/icons/Facebook_Logo_Primary.png" alt="Facebook" class="h-6 w-6" loading="lazy"/>
+        <!-- Redes sociales -->
+        <div class="flex justify-center sm:justify-end space-x-4 order-1 sm:order-2">
+            <a href="https://facebook.com/vinylsvintage" target="_blank" aria-label="Síguenos en Facebook" rel="noopener noreferrer" 
+               class="hover:text-oro-antiguo transition duration-300">
+                <img src="{{ asset('icons/Facebook_Logo_Primary.png') }}" alt="Logo de Facebook de Vinyls Vintage" class="h-6 w-6" loading="lazy"/>
             </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram"> <!-- aria-label es un atributo de accesibilidad para que el sitio sea más inclusivo y accesible -->
-                <img src="/icons/Instagram_icon.png" alt="Instagram" class="h-6 w-6" loading="lazy"/>
+            <a href="https://instagram.com/vinylsvintage" target="_blank" aria-label="Síguenos en Instagram" rel="noopener noreferrer" 
+               class="hover:text-oro-antiguo transition duration-300">
+                <img src="{{ asset('icons/Instagram_icon.png') }}" alt="Logo de Instagram de Vinyls Vintage" class="h-6 w-6" loading="lazy"/>
             </a>
-            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
-                <img src="/icons/logotipo-de-twitter.png" alt="Twitter" class="h-6 w-6" loading="lazy"/>
+            <a href="https://twitter.com/vinylsvintage" target="_blank" aria-label="Síguenos en Twitter" rel="noopener noreferrer" 
+               class="hover:text-oro-antiguo transition duration-300">
+                <img src="{{ asset('icons/logotipo-de-twitter.png') }}" alt="Logo de Twitter de Vinyls Vintage" class="h-6 w-6" loading="lazy"/>
             </a>
-            <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
-                <img src="/icons/tik-tok.png" alt="TikTok" class="h-6 w-6" loading="lazy"/>
+            <a href="https://tiktok.com/@vinylsvintage" target="_blank" aria-label="Síguenos en TikTok" rel="noopener noreferrer" 
+               class="hover:text-oro-antiguo transition duration-300">
+                <img src="{{ asset('icons/tik-tok.png') }}" alt="Logo de TikTok de Vinyls Vintage" class="h-6 w-6" loading="lazy"/>
             </a>
         </div>
     </div>
