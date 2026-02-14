@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-crema-suave text-marron-chocolate">
+<body class="bg-crema-suave text-marron-chocolate"> 
 
     <!-- Barra superior -->
     <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-between items-center shadow-md">
@@ -74,9 +74,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach ($productos as $producto)
                 <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4 flex flex-col items-center">
-                    <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-                        <!-- loading="lazy": hace que el navegador descargue la imagen sólo cuando está cerca de entrar en pantalla, lo que reduce mucho el tiempo de carga inicial si hay muchas tarjetas -->
-                        <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/300x300?text=Vinilo' }}" 
+                    <div class="overflow-hidden rounded-full w-64 h-64 mx-auto"> 
+                       <!-- loading="lazy": hace que el navegador descargue la imagen sólo cuando está cerca de entrar en pantalla, lo que reduce mucho el tiempo de carga inicial si hay muchas tarjetas -->
+                            <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/300x300?text=Vinilo' }}" 
                             alt="{{ $producto->nombre }}"
                             loading="lazy" 
                             class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
@@ -117,8 +117,11 @@
                 {{ $productos->links() }}
             @endif
         </div>
-        
     </section>
 
+    <!-- Incluir pie  -->
+    @include('pie.footer')
+
 </body>
-</html>
+</html> 
+
