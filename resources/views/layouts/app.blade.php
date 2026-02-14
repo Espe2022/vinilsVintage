@@ -14,6 +14,10 @@
         <!-- Scripts -->
         <!-- La plantilla carga Tailwind CSS -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Iconos de Ver y Actualizar en el CRUD -->
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         
     </head>
     <body class="font-sans antialiased">
@@ -39,10 +43,10 @@
                 {{-- Si viene desde una vista con @extends --}}
                 @yield('content')
             </main>
+
+            <!-- Footer -->
+            @include('pie.footer')
         </div>
         
-        <!-- Iconos de Ver y Actualizar en el CRUD -->
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>

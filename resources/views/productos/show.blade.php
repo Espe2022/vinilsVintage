@@ -49,7 +49,4 @@
         })
     </script>
 
-    <!-- Incluir Pie de página -->
-    @include('pie.footer')
-
 </x-app-layout>

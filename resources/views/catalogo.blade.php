@@ -120,8 +120,5 @@
         
     </section>
 
-    <!-- Incluir Pie de página -->
-    @include('pie.footer')
-
 </body>
 </html>
