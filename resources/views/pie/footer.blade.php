@@ -1,13 +1,13 @@
-<footer class="bg-marron-chocolate text-beige-tostado text-center py-6 mt-10">
-    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+<footer class="bg-marron-chocolate text-beige-tostado py-6 mt-10">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
         
         <!-- Derechos -->
-        <p class="text-sm order-2 sm:order-1">
+        <p class="text-sm">
             © {{ date('Y') }} Vinyls Vintage — Todos los derechos reservados.
         </p>
 
         <!-- Redes sociales -->
-        <div class="flex justify-center sm:justify-end space-x-4 order-1 sm:order-2">
+        <div class="flex space-x-4">
             
             <!-- Facebook -->
             <a href="https://facebook.com/vinylsvintage" target="_blank" aria-label="Síguenos en Facebook" rel="noopener noreferrer"
