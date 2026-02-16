@@ -52,5 +52,6 @@
 
 </x-guest-layout>
 
+    
 <!-- Incluir Pie de página -->
 @include('pie.footer')

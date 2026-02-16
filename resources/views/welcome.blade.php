@@ -51,7 +51,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Abbey Road</h2>
         <p class="text-oro-antiguo text-center">The Beatles</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">$39.99</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">39.99€</p>
     </div>
 
     <!-- Producto 2 -->
@@ -61,7 +61,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Dark Side of the Moon</h2>
         <p class="text-oro-antiguo text-center">Pink Floyd</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">$42.50</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">42.50€</p>
     </div>
 
     <!-- Producto 3 -->
@@ -71,7 +71,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Prometo</h2>
         <p class="text-oro-antiguo text-center">Pablo Alborán</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">$35.00</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">35.00€</p>
     </div>
 
     <!-- Producto 4 -->
@@ -81,7 +81,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Pueblo salvaje</h2>
         <p class="text-oro-antiguo text-center">Manuel Carrasco</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">$24.99</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">24.99€</p>
     </div>
 
 </section>
