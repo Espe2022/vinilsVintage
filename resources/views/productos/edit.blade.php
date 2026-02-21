@@ -39,7 +39,7 @@
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
                 <input type="text" name="nombre" id="nombre"
                     value="{{ old('nombre') ?? $producto->nombre}}" 
-                    class="mt-1 block w-full rounded-md shadow-sm border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
+                    class="mt-1 block w-full rounded-md shadow-sm bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
                     placeholder="Ejemplo: Boleros" required>
                     {{-- Validar formulario por parte del usuario y renderizar un posible error.
                     Value sirve, por si hay un error, que no desaparezcan los datos introducidos --}}
@@ -52,7 +52,7 @@
             <div class="mb-4 bg-beige-crema">
                 <label for="descripcion" class="block text-sm font-medium text-marron-chocolate">Descripción</label>
                 <textarea name="descripcion" id="descripcion" rows="4" 
-                    class="mt-1 block w-full rounded-md shadow-sm border-marron-chocolate  focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
+                    class="mt-1 block w-full rounded-md shadow-sm bg-beige-crema border-marron-chocolate  focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
                     placeholder="Ejemplo: Descripción detallada del producto..." required>{{ old('descripcion') ?? $producto->descripcion }}</textarea>
                     {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
                     @error('descripcion')
@@ -65,7 +65,7 @@
                 <label for="precio" class="block text-sm font-medium text-marron-chocolate">Precio</label>
                 <input type="number" step="0.01" name="precio" id="precio" 
                     value="{{ old('precio') ?? $producto->precio}}" 
-                    class="mt-1 block w-full rounded-md shadow-sm border-marron-chocolate  focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
+                    class="mt-1 block w-full rounded-md shadow-sm bg-beige-crema border-marron-chocolate  focus:border-oro-antiguo focus:ring-oro-antiguo sm:text-sm"
                     placeholder="Ejemplo: 210.99" required>
                     {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
                     @error('precio')
