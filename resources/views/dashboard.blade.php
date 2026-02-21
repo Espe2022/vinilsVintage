@@ -12,7 +12,7 @@
                     <div class="p-6 bg-beige-crema border-b border-gray-200">
                         <h1 class="bg-marron-chocolate text-beige-tostado text-5xl text-center font-bold mb-8">
                             <!-- mb-8 indica el margen entre el h1 y la tabla -->
-                        Histórico de tus productos
+                        Histórico de los productos
                         </h1>
 
                         <table class="min-w-full divide-y divide-gray-200">
