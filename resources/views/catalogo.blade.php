@@ -82,7 +82,8 @@
                             class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
                     </div>
 
-                    <h3 class="text-xl font-semibold mt-3 text-center">{{ $producto->nombre }}</h3>
+                    <!-- "whitespace-nowrap overflow-hidden": el nombre del disco debe entrar en 1 línea -->
+                    <h3 class="text-xl font-semibold mt-3 text-center whitespace-nowrap overflow-hidden">{{ $producto->nombre }}</h3>
                     <p class="text-oro-antiguo text-center">{{ $producto->descripcion }}</p>
                     <p class="text-marron-chocolate font-bold mt-2 text-center">{{ number_format($producto->precio, 2) }} €</p>
               
