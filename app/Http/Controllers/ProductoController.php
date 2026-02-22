@@ -40,7 +40,7 @@ class ProductoController extends Controller
     public function create()
     {
         //Trae todos los usuarios y productos de la base de datos
-        $users = User::all();
+        //$users = User::all();
         $productos = Producto::all();  
 
         //Pasa la variable $productos a la vista
