@@ -16,7 +16,7 @@
                 <label for="categoria" class="block text-sm font-medium text-marron-chocolate">Categoría:</label>
                 <!-- Array de categorías -->
                 @php
-                    $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino'];
+                    $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica Latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino', 'Flamenco', 'Música Clásica'];
                 @endphp
 
                 <select name="categoria" id="categoria"
