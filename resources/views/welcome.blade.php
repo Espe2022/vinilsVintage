@@ -89,7 +89,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Dark Side of the Moon</h2>
         <p class="text-oro-antiguo text-center">Pink Floyd</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">42.50€</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">31.99€</p>
     </div>
 
     <!-- Producto 3: Prometo (miniatura 400px) -->
@@ -110,7 +110,7 @@
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Prometo</h2>
         <p class="text-oro-antiguo text-center">Pablo Alborán</p>
-        <p class="text-marron-chocolate font-bold mt-2 text-center">35.00€</p>
+        <p class="text-marron-chocolate font-bold mt-2 text-center">17.00€</p>
     </div>
 
     <!-- Producto 4: Pueblo Salvaje (miniatura 400px) -->
