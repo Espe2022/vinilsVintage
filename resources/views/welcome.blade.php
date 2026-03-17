@@ -7,6 +7,9 @@
 
     {{-- Carga Tailwind y JS con Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Preload para imagen principal -->
+    <link rel="preload" as="image" href="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}">
 </head>
 
 <body class="bg-crema-suave text-marron-chocolate">
@@ -47,7 +50,14 @@
     <!-- Producto 1 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <img src="https://www.thebeatles.com/sites/default/files/styles/max_2600x2600/public/2021-06/Abbey%20Road.jpg?itok=_AGlITc8" alt="Abbey Road" class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out">
+            <picture>
+                <source srcset="{{ asset('images/AbbeyRoad-749.webp') }}" type="image/webp">
+                <img 
+                    src="{{ asset('images/AbbeyRoad.webp') }}" 
+                    alt="Abbey Road"
+                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                >
+            </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Abbey Road</h2>
         <p class="text-oro-antiguo text-center">The Beatles</p>
@@ -57,7 +67,12 @@
     <!-- Producto 2 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" alt="Dark Side of the Moon" class="w-full h-64 object-cover rounded-xl transform hover:scale-105 transition duration-300 ease-in-out">
+            <!-- Imagen principal responsive -->
+            <img 
+                src="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}" 
+                alt="Dark Side of the Moon"
+                class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+            />
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Dark Side of the Moon</h2>
         <p class="text-oro-antiguo text-center">Pink Floyd</p>
@@ -67,7 +82,13 @@
     <!-- Producto 3 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <img src="https://m.media-amazon.com/images/I/61rgentIYZL._SX425_.jpg" alt="Prometo" class="w-full h-64 object-cover rounded-xl transform hover:scale-105 transition duration-300 ease-in-out">
+            <picture>
+                <img 
+                    src="{{ asset('images/Prometo-749.webp') }}" 
+                    alt="Prometo"
+                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                >
+            </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Prometo</h2>
         <p class="text-oro-antiguo text-center">Pablo Alborán</p>
@@ -77,7 +98,13 @@
     <!-- Producto 4 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <img src="https://www.lahiguera.net/musicalia/artistas/manuel_carrasco/disco/13970/tema/32125/portada-p.jpg" alt="Pueblo salvaje" class="w-full h-64 object-cover rounded-xl transform hover:scale-105 transition duration-300 ease-in-out">
+            <picture>
+                <img 
+                    src="{{ asset('images/PuebloSalvaje-749.webp') }}" 
+                    alt="PuebloSalvaje"
+                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                >
+            </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Pueblo salvaje</h2>
         <p class="text-oro-antiguo text-center">Manuel Carrasco</p>
