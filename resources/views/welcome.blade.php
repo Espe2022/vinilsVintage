@@ -10,6 +10,9 @@
 
     <!-- Preload para imagen principal -->
     <link rel="preload" as="image" href="{{ asset('images/AbbeyRoad-749.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('images/Prometo-749.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('images/PuebloSalvaje-749.webp') }}">
 </head>
 
 <body class="bg-crema-suave text-marron-chocolate">
