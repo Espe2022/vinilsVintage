@@ -22,4 +22,13 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # ===============================================
+    # Cache de imágenes estáticas (WebP, PNG, JPG, GIF)
+    # ===============================================
+    <IfModule mod_headers.c>
+        <FilesMatch "\.(webp|png|jpg|jpeg|gif)$">
+            Header set Cache-Control "public, max-age=31536000, immutable"
+        </FilesMatch>
+    </IfModule>
 </IfModule>
