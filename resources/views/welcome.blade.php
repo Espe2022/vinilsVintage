@@ -9,7 +9,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Preload para imagen principal -->
+    <link rel="preload" as="image" href="{{ asset('images/AbbeyRoad-749.webp') }}">
     <link rel="preload" as="image" href="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('images/Prometo-749.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('images/PuebloSalvaje-749.webp') }}">
+</head>
+</head>
+</head>
 </head>
 
 <body class="bg-crema-suave text-marron-chocolate">
@@ -67,12 +73,14 @@
     <!-- Producto 2 -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
-            <!-- Imagen principal responsive -->
-            <img 
-                src="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}" 
-                alt="Dark Side of the Moon"
-                class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
-            />
+            <picture>
+                <source srcset="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}" type="image/webp">
+                <img 
+                    src="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}" 
+                    alt="Dark Side of the Moon"
+                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                >
+            </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Dark Side of the Moon</h2>
         <p class="text-oro-antiguo text-center">Pink Floyd</p>
@@ -83,6 +91,7 @@
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
             <picture>
+                <source srcset="{{ asset('images/Prometo-749.webp') }}" type="image/webp">
                 <img 
                     src="{{ asset('images/Prometo-749.webp') }}" 
                     alt="Prometo"
@@ -99,6 +108,7 @@
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
             <picture>
+                <source srcset="{{ asset('images/PuebloSalvaje-749.webp') }}" type="image/webp">
                 <img 
                     src="{{ asset('images/PuebloSalvaje-749.webp') }}" 
                     alt="PuebloSalvaje"
