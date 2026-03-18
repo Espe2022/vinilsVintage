@@ -9,10 +9,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Preload para imagen principal -->
-    <link rel="preload" as="image" href="{{ asset('images/AbbeyRoad-749.webp') }}">
-    <link rel="preload" as="image" href="{{ asset('images/Dark_Side_of_the_Moon-749.webp') }}">
-    <link rel="preload" as="image" href="{{ asset('images/Prometo-749.webp') }}">
-    <link rel="preload" as="image" href="{{ asset('images/PuebloSalvaje-749.webp') }}">
+    <link rel="preload" as="image"
+      href="{{ asset('images/AbbeyRoad-256.webp') }}"
+      imagesrcset="{{ asset('images/AbbeyRoad-256.webp') }} 256w,
+                    {{ asset('images/AbbeyRoad-512.webp') }} 512w,
+                    {{ asset('images/AbbeyRoad-749.webp') }} 749w"
+      imagesizes="(max-width: 640px) 256px,
+                  (max-width: 1024px) 512px,
+                  749px">
 </head>
 
 <body class="bg-crema-suave text-marron-chocolate">
@@ -50,20 +54,23 @@
 <!-- Catálogo de destacados -->
 <section class="max-w-7xl mx-auto p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-    <!-- Producto 1: Abbey Road (primera imagen visible, 256px) -->
+    <!-- Producto 1: Abbey Road (carga prioritaria) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
-        <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
+        <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
             <picture>
                 <source 
                     srcset="{{ asset('images/AbbeyRoad-256.webp') }} 256w,
-                            {{ asset('images/AbbeyRoad-749.webp') }} 749w" 
+                            {{ asset('images/AbbeyRoad-512.webp') }} 512w,
+                            {{ asset('images/AbbeyRoad-749.webp') }} 749w"
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 512px, 749px"
                     type="image/webp">
                 <img 
-                    src="{{ asset('images/AbbeyRoad-256.webp') }}" 
+                    src="{{ asset('images/AbbeyRoad-256.webp') }}"
                     alt="Abbey Road"
-                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                    class="w-full h-full object-cover relative"
                     loading="eager"
-                >
+                    fetchpriority="high"
+                    decoding="async">
             </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Abbey Road</h2>
@@ -71,20 +78,23 @@
         <p class="text-marron-chocolate font-bold mt-2 text-center">39.99€</p>
     </div>
 
-    <!-- Producto 2: Dark Side of the Moon (miniatura 400px) -->
+    <!-- Producto 2: Dark Side of the Moon (lazy) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
-        <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
+        <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
             <picture>
                 <source 
-                    srcset="{{ asset('images/Dark_Side_of_the_Moon-400.webp') }} 400w,
-                            {{ asset('images/Dark_Side_of_the_Moon-749.webp') }} 749w" 
+                    srcset="{{ asset('images/Dark_Side_of_the_Moon-256.webp') }} 256w,
+                            {{ asset('images/Dark_Side_of_the_Moon-512.webp') }} 512w,
+                            {{ asset('images/Dark_Side_of_the_Moon-749.webp') }} 749w"
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 512px, 749px"
                     type="image/webp">
                 <img 
-                    src="{{ asset('images/Dark_Side_of_the_Moon-400.webp') }}" 
+                    src="{{ asset('images/Dark_Side_of_the_Moon-256.webp') }}"
                     alt="Dark Side of the Moon"
-                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                    class="w-full h-full object-cover relative"
                     loading="lazy"
-                >
+                    fetchpriority="low"
+                    decoding="async">
             </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Dark Side of the Moon</h2>
@@ -92,20 +102,23 @@
         <p class="text-marron-chocolate font-bold mt-2 text-center">31.99€</p>
     </div>
 
-    <!-- Producto 3: Prometo (miniatura 400px) -->
+    <!-- Producto 3: Prometo (lazy) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
-        <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
+        <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
             <picture>
                 <source 
-                    srcset="{{ asset('images/Prometo-400.webp') }} 400w,
-                            {{ asset('images/Prometo-749.webp') }} 749w" 
+                    srcset="{{ asset('images/Prometo-256.webp') }} 256w,
+                            {{ asset('images/Prometo-512.webp') }} 512w,
+                            {{ asset('images/Prometo-749.webp') }} 749w"
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 512px, 749px"
                     type="image/webp">
                 <img 
-                    src="{{ asset('images/Prometo-400.webp') }}" 
+                    src="{{ asset('images/Prometo-256.webp') }}"
                     alt="Prometo"
-                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                    class="w-full h-full object-cover relative"
                     loading="lazy"
-                >
+                    fetchpriority="low"
+                    decoding="async">
             </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Prometo</h2>
@@ -113,20 +126,23 @@
         <p class="text-marron-chocolate font-bold mt-2 text-center">17.00€</p>
     </div>
 
-    <!-- Producto 4: Pueblo Salvaje (miniatura 400px) -->
+    <!-- Producto 4: Pueblo Salvaje (lazy) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
-        <div class="overflow-hidden rounded-full w-64 h-64 mx-auto">
+        <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
             <picture>
                 <source 
-                    srcset="{{ asset('images/PuebloSalvaje-400.webp') }} 400w,
-                            {{ asset('images/PuebloSalvaje-749.webp') }} 749w" 
+                    srcset="{{ asset('images/PuebloSalvaje-256.webp') }} 256w,
+                            {{ asset('images/PuebloSalvaje-512.webp') }} 512w,
+                            {{ asset('images/PuebloSalvaje-749.webp') }} 749w"
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 512px, 749px"
                     type="image/webp">
                 <img 
-                    src="{{ asset('images/PuebloSalvaje-400.webp') }}" 
+                    src="{{ asset('images/PuebloSalvaje-256.webp') }}"
                     alt="Pueblo Salvaje"
-                    class="w-full h-full object-cover rounded-full transform hover:scale-105 transition duration-300 ease-in-out"
+                    class="w-full h-full object-cover relative"
                     loading="lazy"
-                >
+                    fetchpriority="low"
+                    decoding="async">
             </picture>
         </div>
         <h2 class="text-xl font-semibold mt-3 text-center">Pueblo salvaje</h2>
