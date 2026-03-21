@@ -1,27 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
-
+//Indica que la clase pertenece al espacio de nombres de controladores de Laravel
+namespace App\Http\Controllers; 
+//Importa las clases que voy a usar: modelo Producto, Request, Auth, DB, User
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
+//Controlador que gestiona el CRUD de los productos (vinilos) y la búsqueda/catálogo
+
+//Define el controlador, que extiende de la clase base Controller de Laravel
 class ProductoController extends Controller
-{
-    //Contiene toda la lógica a la app(CRUD)
-    
+{    
     //Consulta la base de datos y muestra los productos a través de la vista
-    public function index(){
-        //Consulta a la bd a nuestra tabla productos. Es privado para usuarios autenticados
+    public function index()
+    {
+        //Obtiene los productos del usuario autenticado (where('user_id', Auth::id())) y los pagina de 5 en 5
         $productos=Producto::where('user_id', Auth::id())->paginate(5); //5 productos por página
+        
+        //Devuelve la vista productos.index con la variable $productos
         return view('productos.index', compact('productos'));
     }
 
+    //Consulta la tabla productos con el query builder (DB::table) para mostrar un catálogo general
     public function catalogo()
     {
-        //Mostrar catálogo general
+        /*Agrupa por nombre y selecciona un mínimo de id, descripcion, precio, imagen (básicamente 
+        una “versión” de cada producto) y pagina de 4 en 4*/
         $productos = DB::table('productos')
             ->select(
                 DB::raw('MIN(id) as id'),
@@ -31,26 +38,29 @@ class ProductoController extends Controller
                 DB::raw('MIN(imagen) as imagen')
             )
             ->groupBy('nombre')
-            ->paginate(4);
+            ->paginate(4);   //pagina de 4 en 4
 
+        //Devuelve la vista catalogo. compact = genera el array ('productos' => $productos)
         return view('catalogo', compact('productos'));
     }
 
-    //Redirecciona a una vista de create para mostrar el formulario para crear un producto
+    //Muestra el formulario de creación
     public function create()
     {
-        //Trae todos los usuarios y productos de la base de datos
-        //$users = User::all();
+        //Recupera todos los productos de la base de datos
         $productos = Producto::all();  
 
-        //Pasa la variable $productos a la vista
+        //Devuelve la vista productos.create
         return view('productos.create', compact('productos'));
     }
 
-    //Guardar un producto en la base de datos
-    public function store(Request $request){
+    //Guarda un producto en la base de datos
 
-        //Validar los campos del formulario por parte del servidor
+    /*Request $request es la forma objeto de Laravel que se usa para leer y manejar la petición 
+    que llega al servidor (formularios, filtros de búsqueda,...)*/
+    public function store(Request $request)
+    {
+        //Valida los campos del formulario por parte del servidor
         $request->validate([
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string',
@@ -61,7 +71,8 @@ class ProductoController extends Controller
         ],
         );
 
-        //Lógica para guardar un producto
+        /*Lógica para guardar un producto: Crea un nuevo registro en la tabla productos 
+        con Producto::create([...]), asignando user_id al id del usuario logueado*/
         Producto::create([
             'user_id'=>Auth::id(),  //El id del usuario autenticado asignarlo a user_id
             'nombre'=>$request->nombre, //El nombre es el contenido del name del formulario
@@ -72,30 +83,36 @@ class ProductoController extends Controller
             'stock'=>$request->stock
         ]);
 
-        //Redirigir a la lista principal (index) con mensaje de éxito
+        //Redirigir a la lista principal (index) con un mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto creado con éxito!');
     }
 
     //Buscar en la base de datos un producto por su id y se muestra en una vista
     public function show($id){
-        //Mostrar un producto específico por su ID, sino lo encuentra, Laravel devuelve automáticamente una página 404
+
+        /*findOrFail es un método de Eloquent (Laravel) que se usa para buscar un registro por su ID,
+        sino lo encuentra, Laravel devuelve automáticamente una página 404*/
         $producto=Producto::findOrFail($id);
+
+        //Muestra la vista productos.show
         return view('productos.show', compact('producto'));
     }
 
     //Buscar en la base de datos un producto por su id y mandarlo a un formulario
     public function edit($id){
+        
+        /*findOrFail es un método de Eloquent (Laravel) que se usa para buscar un registro por su ID,
+        sino lo encuentra, Laravel devuelve automáticamente una página 404*/
         $producto=Producto::findOrFail($id);
 
+        //Muestra la vista productos.edit con el formulario de edición
         return view('productos.edit', compact('producto'));
     }
 
-    //Actualizar un producto por su id
+    //Lógica para actualizar un producto por su id
     public function update(Request $request, $id)
     {
-        //Lógica para actualizar
-
-        //Validar los campos del formulario por parte del servidor
+        //Valida los campos del formulario recibidos por parte del servidor
         $request->validate([
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string',
@@ -105,10 +122,10 @@ class ProductoController extends Controller
         ],
         );
 
-        //Buscar el producto en la base de datos
+        //Busca el producto en la base de datos con findOrFail($id)
         $producto=Producto::findOrFail($id);
 
-        //Actualizar el producto con los datos del formulario
+        //Actualiza el producto con los datos del formulario
         $producto->update([
             'nombre'=> $request->nombre,
             'descripcion'=>$request->descripcion,
@@ -117,38 +134,45 @@ class ProductoController extends Controller
             'stock'=>$request->stock
         ]);
 
-        //Redirigir al listado de productos (index) con mensaje de éxito
+        //Redirige al listado de productos (index) con un mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto actualizado con éxito!');
     }
 
-    //Buscar discos por género, cantante o título
+    //Busca discos por categoría o nombre
     public function buscar(Request $request)
     {
+        //Lee el término de búsqueda ($buscar)
         $buscar = $request->input('buscar');
 
         //Si no se escribió nada en el buscador, vuelve al catálogo normal
-        if (!$buscar) {
+        if (!$buscar)
+        {
             return redirect()->route('catalogo');
         }
 
-        //Buscar por categoria o nombre
+        /*Hace una consulta a Producto buscando por categoria o nombre con LIKE "%texto%" 
+        y pagina de 4 en 4*/
         $productos = Producto::where('categoria', 'LIKE', "%$buscar%")
                             ->orWhere('nombre', 'LIKE', "%$buscar%")
                             ->paginate(4); 
 
-        //Mantener la búsqueda en la paginación
+        //Mantiene el parámetro buscar en la paginación ($productos->appends(['buscar' => $buscar]))
         $productos->appends(['buscar' => $buscar]);
 
+        //Devuelve la vista catalogo con los resultados y el texto que se escribió en el input de búsqueda
         return view('catalogo', compact('productos', 'buscar'));
     }
 
-    //Eliminar un producto por su id
-    public function destroy($id){
-        //Lógica para eliminar
+    //Lógica para eliminar un producto por su id
+    public function destroy($id)
+    {
+        //Busca el producto por id (findOrFail)
         $producto=Producto::findOrFail($id);
+
+        //Llama a $producto->delete() para eliminarlo de la base de datos
         $producto->delete();
 
-        //Redirigir a la lista principal (index) con mensaje de éxito
+        //Redirige a la lista principal (index) con un mensaje de éxito
         return redirect()->route('productos.index')->with('success', '¡Producto eliminado con éxito!');
     }
 }
