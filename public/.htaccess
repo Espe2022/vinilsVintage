@@ -23,9 +23,11 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # ===============================================
+    # =================================================
     # Cache de imágenes estáticas (WebP, PNG, JPG, GIF)
-    # ===============================================
+    # =================================================
+    <!-- Los navegadores y cachés que pueden cachear esas imágenes durante un año sin volver 
+    a pedirlas al servidor, lo que mejora bastante el rendimiento en visitas repetidas -->
     <IfModule mod_headers.c>
         <FilesMatch "\.(webp|png|jpg|jpeg|gif)$">
             Header set Cache-Control "public, max-age=31536000, immutable"
