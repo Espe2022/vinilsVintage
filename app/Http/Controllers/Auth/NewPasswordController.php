@@ -36,7 +36,7 @@ class NewPasswordController extends Controller
     public function store(Request $request): RedirectResponse
     {
         /*Valida:
-        Que venga el token (el que estaba en el email)
+        Que esté el token (el que estaba en el email)
         Que el email tenga formato correcto
         Que la contraseña se confirme y cumpla las reglas por defecto*/
         $request->validate([
