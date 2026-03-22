@@ -4,6 +4,19 @@
 <div class="max-w-4xl mx-auto p-6 bg-crema-suave rounded-xl shadow">
     <h2 class="text-5xl text-center font-extrabold leading-tight tracking-tight text-marron-chocolate">🛍️ Tu Carrito</h2>
 
+    {{-- Mensajes flash --}}
+    @if(session('success'))
+        <div class="mt-4 bg-crema-suave border border-oro-antiguo text-marron-chocolate px-4 py-3 rounded">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @forelse($items as $item)
         <div class="flex items-center justify-between border-b py-4">
             <div class="flex items-center space-x-4">
