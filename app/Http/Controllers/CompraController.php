@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\DB;
 class CompraController extends Controller
 {
     /*Método que convierte el carrito en una compra real, descontando stock de cada vinilo, registrando
-    lo comprado y vaciando el carrito, todo de forma segura con transacciones*/
+    lo comprado y vaciando el carrito, todo de forma segura con transacciones.
+    El usuario pulsa "Finalizar compra*/
     public function comprar()
     {
         //Obtiene el usuario logueado
