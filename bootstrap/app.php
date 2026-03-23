@@ -8,10 +8,10 @@
 | Este archivo se encarga de configurar y crear la instancia principal
 | de la aplicación Laravel (aquí se configura el arranque de la aplicación).
 |
-| Aquí se definen:
-| - Rutas
-| - Middleware
-| - Manejo de excepciones
+| Este archivo:
+| - Inicializa Laravel
+| - Configura rutas, middleware y errores
+| - Devuelve la aplicación lista para ejecutarse
 |
 | Es uno de los primeros archivos que se ejecutan al iniciar el sistema.
 |
@@ -79,14 +79,3 @@ return Application::configure(basePath: dirname(__DIR__))
 
 
 
-/*
-|--------------------------------------------------------------------------
-| RESUMEN
-|--------------------------------------------------------------------------
-|
-| Este archivo:
-| - Inicializa Laravel
-| - Configura rutas, middleware y errores
-| - Devuelve la aplicación lista para ejecutarse
-|
-*/
