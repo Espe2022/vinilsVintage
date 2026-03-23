@@ -5,6 +5,8 @@
 | Service Providers de la aplicación
 |--------------------------------------------------------------------------
 |
+| Es una clase que permite registrar servicios en Laravel, es decir, configurar 
+| cómo se cargan ciertas funcionalidades dentro del sistema.
 | Este archivo define los proveedores de servicios propios de la aplicación.
 |
 | A diferencia de otros archivos donde Laravel registra automáticamente
