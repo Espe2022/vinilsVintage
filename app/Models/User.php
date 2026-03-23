@@ -4,22 +4,23 @@
 evitar conflictos de nombres.*/
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-/*La clase User hereda de Authenticatable para que este modelo pueda autenticarse (LOGIN: un usuario puede 
-iniciar sesión)*/
+/**
+ * Modelo User
+ * - Hereda de Authenticatable → permite login/autenticación
+ * - Organiza usuarios de la aplicación
+ */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use Notifiable; //Para enviar notificaciones al usuario
     use HasFactory; //Para usar factories y crear usuarios de prueba fácilmente
 
     /**
-     * The attributes that are mass assignable (Los atributos que pueden ser asignados de manera masiva)
-     * Al crear un usuario, éstos son los campos que puedes rellenar directamente.
+     * Atributos que se pueden asignar masivamente
+     * Al crear un usuario, éstos son los campos que puedes rellenar directamente
      *
      * @var list<string>
      */
@@ -31,8 +32,8 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization (Los atributos que deben ser ocultados durante la serialización).
-     *
+     * Atributos ocultos cuando serializamos el modelo (JSON, arrays)
+     * 
      * @var list<string>
      */
     protected $hidden = [
@@ -41,7 +42,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast (Obtener los atributos que deben ser convertidos (casteados)).
+     * Atributos que se convierten automáticamente
+     * - email_verified_at → datetime
+     * - password → hashed automáticamente
      *
      * @return array<string, string>
      */
@@ -52,6 +55,10 @@ class User extends Authenticatable
             'password' => 'hashed', //Se guarda automáticamente hasheado (seguro)
         ];
     }
+
+    // ----------------------
+    // Relaciones
+    // ----------------------
 
     /**
      * Relación: Un usuario puede tener muchos productos (1:N)
@@ -82,13 +89,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductoComprado::class);
     }
+
+    // ----------------------
+    // Mutators / Métodos
+    // ----------------------
     
-    //Mutator para email: Laravel automáticamente convierte el email a minúsculas antes de guardarlo en la base de datos
+    /**
+     * Mutator: Convierte automáticamente el email a minúsculas antes de guardarlo
+     */
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
     }
 
+    /**
+     * Método de conveniencia: Comprueba si el usuario es administrador
+     */
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
