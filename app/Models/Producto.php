@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+//Modelo Producto que representa la tabla 'productos' en la base de datos
 class Producto extends Model
 {
-    use HasFactory;
+    use HasFactory; //Permite usar fábricas para pruebas o seeders
 
     //Indica explícitamente que la tabla de la base de datos 'productos' está asociada al modelo Producto.php
     protected $table='productos';
@@ -28,8 +29,13 @@ class Producto extends Model
         'stock' 
     ];
 
+    // ----------------------
+    // Relaciones Eloquent
+    // ----------------------
+
     /**
      * Definir la relación: Un producto pertenece a un usuario (1:1)
+     * - Cada producto tiene un user_id
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -40,6 +46,7 @@ class Producto extends Model
 
     /**
      * Definir la relación: Un producto puede estar en varios carritos (1:N)
+     * - Esto permite acceder a todos los carritos donde aparece este producto
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -50,6 +57,7 @@ class Producto extends Model
 
     /**
      * Definir la relación: Un producto puede estar en varias compras (1:N)
+     * - Esto permite acceder a todas las instancias de ProductoComprado
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
