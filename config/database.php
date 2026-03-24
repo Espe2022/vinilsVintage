@@ -6,13 +6,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | Conexión por defecto
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for database operations. This is
-    | the connection which will be utilized unless another connection
-    | is explicitly specified when you execute a query / statement.
+    | Define qué base de datos usa Laravel por defecto.
+    | Se obtiene del archivo .env (DB_CONNECTION).
+    | Ejemplo: mysql, sqlite, pgsql...
     |
     */
 
@@ -20,17 +19,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Database Connections
+    | Conexiones de base de datos
     |--------------------------------------------------------------------------
     |
-    | Below are all of the database connections defined for your application.
-    | An example configuration is provided for each database system which
-    | is supported by Laravel. You're free to add / remove connections.
+    | Aquí se definen todas las conexiones disponibles.
+    | Laravel permite trabajar con distintos motores:
+    | - MySQL
+    | - SQLite
+    | - PostgreSQL
+    | - SQL Server
     |
     */
 
     'connections' => [
 
+        // ========================
+        // SQLite (ligero, local)
+        // ========================
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
@@ -42,6 +47,9 @@ return [
             'synchronous' => null,
         ],
 
+        // ========================
+        // MySQL (el más usado)
+        // ========================
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
@@ -62,6 +70,9 @@ return [
             ]) : [],
         ],
 
+        // ========================
+        // MariaDB (similar a MySQL)
+        // ========================
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
@@ -82,6 +93,9 @@ return [
             ]) : [],
         ],
 
+        // ========================
+        // PostgreSQL
+        // ========================
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
@@ -97,6 +111,9 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        // ========================
+        // SQL Server
+        // ========================
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
@@ -116,12 +133,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Migration Repository Table
+    | Migraciones
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run on the database.
+    | Laravel usa esta tabla para saber qué migraciones ya se han ejecutado.
+    | Esto evita repetirlas.
     |
     */
 
@@ -132,12 +148,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Redis Databases
+    | Redis (cache avanzada)
     |--------------------------------------------------------------------------
     |
-    | Redis is an open source, fast, and advanced key-value store that also
-    | provides a richer body of commands than a typical key-value system
-    | such as Memcached. You may define your connection settings here.
+    | Redis es un sistema rápido de almacenamiento en memoria.
+    | Se usa para cache, sesiones o colas.
     |
     */
 
@@ -150,6 +165,7 @@ return [
             'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
         ],
 
+        // Conexión principal
         'default' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -159,6 +175,8 @@ return [
             'database' => env('REDIS_DB', '0'),
         ],
 
+
+        // Conexión para cache
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -171,3 +189,23 @@ return [
     ],
 
 ];
+
+/*
+Este archivo configura la conexión a la base de datos. Laravel permite usar distintos motores 
+como MySQL o SQLite, y la configuración se obtiene principalmente desde el archivo .env.
+
+En mi proyecto utilizo MySQL para almacenar productos, usuarios, carrito y compras, gestionados 
+mediante Eloquent ORM.
+
+Se configuran las credenciales     En el archivo .env, por ejemplo DB_DATABASE, DB_USERNAME y DB_PASSWORD.
+
+DB_CONNECTION   Define qué tipo de base de datos se usa por defecto.
+
+Migraciones     Son archivos que permiten crear y modificar tablas de forma controlada.
+
+Redis   Un sistema de almacenamiento en memoria usado para cache y mejorar rendimiento.
+
+Laravel desacopla la configuración de la base de datos mediante el archivo .env, lo que permite cambiar 
+de entorno sin modificar el código.
+
+*/
