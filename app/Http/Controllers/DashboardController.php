@@ -2,56 +2,114 @@
 
 namespace App\Http\Controllers;
 
+// ================================
+// IMPORTACIONES
+// ================================
 use App\Models\Producto;
 use App\Models\ProductoComprado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-/*Controlador que construye los datos del panel (dashboard) para mostrar un resumen de productos y 
-compras del usuario (o de todos, si es admin)*/
+/*
+|--------------------------------------------------------------------------
+| Controlador del Dashboard
+|--------------------------------------------------------------------------
+|
+| Este controlador construye los datos necesarios para mostrar el panel
+| principal (dashboard) de la aplicación.
+|
+| Muestra:
+| - Productos del usuario (o todos si es admin)
+| - Historial de compras
+| - Datos combinados para visualización (listados)
+|
+*/
+
 class DashboardController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar dashboard
+    |--------------------------------------------------------------------------
+    */
     public function dashboard()
     {
         //Obtener usuario autenticado
         $user = Auth::user();
 
-        //Productos del usuario (o todos si es admin)
+        /*
+        |--------------------------------------------------------------------------
+        | Obtener productos
+        |--------------------------------------------------------------------------
+        |
+        | - Si es admin → obtiene todos los productos
+        | - Si es usuario → solo sus productos
+        |
+        */
         $productos = $user->isAdmin()
             ? Producto::all()
             : Producto::where('user_id', $user->id)->get();
 
-        //Mapea a un formato sencillo para el histórico: Recorrer la colección de productos
+        /*
+        |--------------------------------------------------------------------------
+        | Transformar productos propios
+        |--------------------------------------------------------------------------
+        |
+        | Se mapean a un formato simple para mostrar en el dashboard:
+        | - nombre (con fecha)
+        | - cantidad (stock)
+        |
+        */
         $productosPropios = $productos->map(function($producto){
+
+            // Formatear fecha de creación
             $fecha = $producto->created_at
                 ? $producto->created_at->format('d/m/Y')
                 : now()->format('d/m/Y');
 
-            //nombre: “Nombre del vinilo (fecha de creación)”
-            //cantidad: el stock actual de ese producto
             return [
+                // Nombre del producto + fecha
                 'nombre'   => $producto->nombre . ' (' . $fecha . ')',
+                
+                // Stock disponible
                 'cantidad' => $producto->stock,
             ];
         });
 
-        //Compras (historial de ProductoComprado):
-        //Admin: ve todas las compras de todos los usuarios
-        //Usuario: solo sus propias compras
+        /*
+        |--------------------------------------------------------------------------
+        | Obtener historial de compras
+        |--------------------------------------------------------------------------
+        |
+        | - Admin → ve todas las compras
+        | - Usuario → solo sus compras
+        |
+        */
         $compras = $user->isAdmin()
             ? ProductoComprado::orderBy('created_at', 'asc')->get()
             : ProductoComprado::where('user_id', $user->id)
                 ->orderBy('created_at', 'asc')
                 ->get();
 
-        /*Luego las transforma:
-        Busca el Producto asociado a cada ProductoComprado y monta:
-        nombre: nombre del vinilo + fecha de compra
-        cantidad: cuántas unidades se compraron*/
+        /*
+        |--------------------------------------------------------------------------
+        | Transformar compras
+        |--------------------------------------------------------------------------
+        |
+        | Se convierten en formato:
+        | - nombre (producto + fecha de compra)
+        | - cantidad comprada
+        |
+        */
         $productosComprados = $compras->map(function($compra) {
+
+            // Buscar el producto asociado
             $producto = Producto::find($compra->product_id);
+
             if ($producto) {
+
+                // Formatear fecha de compra
                 $fecha = $compra->created_at
                     ? $compra->created_at->format('d/m/Y')
                     : now()->format('d/m/Y');
@@ -61,18 +119,57 @@ class DashboardController extends Controller
                     'cantidad' => $compra->cantidad,
                 ];
             }
-        })->filter();   //elimina los null por si algún producto ya no existe
+        })
+        //Eliminar valores null si algún producto ya no existe
+        ->filter();  
 
-        //Combina los datos para el dashboard
+        /*
+        |--------------------------------------------------------------------------
+        | Combinar datos
+        |--------------------------------------------------------------------------
+        |
+        | Se unen:
+        | - Productos propios
+        | - Productos comprados
+        |
+        */
         $productosCombinados = $productosPropios->concat($productosComprados);
-        /*Saca dos colecciones:
-        $nombres: etiquetas para el listado
-        $cantidades: valores numéricos (stock o cantidad comprada)*/
+        
+        /*
+        |--------------------------------------------------------------------------
+        | Preparar datos para la vista
+        |--------------------------------------------------------------------------
+        |
+        | Se separan en:
+        | - nombres → etiquetas
+        | - cantidades → valores numéricos
+        |
+        */
         $nombres    = $productosCombinados->pluck('nombre');
         $cantidades = $productosCombinados->pluck('cantidad');
 
-        //Devuelve la vista del dashboard
+        /*
+        |--------------------------------------------------------------------------
+        | Retornar vista
+        |--------------------------------------------------------------------------
+        */
         return view('dashboard', compact('nombres', 'cantidades', 'productosCombinados'));
     }
-
 }
+
+/*
+Este controlador demuestra lógica de datos + roles (admin/usuario) + transformación de datos.
+
+Este controlador genera los datos del dashboard, diferenciando entre usuarios normales y administradores, 
+y transformando la información para poder representarla en la interfaz, por ejemplo en listado.
+
+El dashboard permite ver un resumen de la actividad, como productos disponibles y compras realizadas, 
+lo que ayuda a gestionar la tienda.
+
+Control de roles (isAdmin())    Permite mostrar distintos datos según el tipo de usuario.
+
+Uso de map()    Transforma los datos para adaptarlos a la vista sin modificar la base de datos.
+
+Uso de pluck()  Extrae valores concretos para representarlos en listados.
+
+Combinación de datos    Une productos y compras en una sola colección para mostrar información global.
