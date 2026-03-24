@@ -2,33 +2,58 @@
 
 //Indica que la clase pertenece al espacio de nombres de controladores de Laravel
 namespace App\Http\Controllers; 
-//Importa las clases que voy a usar: modelo Producto, Request, Auth, DB, User
+
+// ================================
+// IMPORTACIONES
+// ================================
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
-//Controlador que gestiona el CRUD de los productos (vinilos) y la búsqueda/catálogo
+/*
+|--------------------------------------------------------------------------
+| Controlador de Productos
+|--------------------------------------------------------------------------
+|
+| Este controlador gestiona toda la lógica relacionada con los productos
+| (vinilos) de la tienda:
+|
+| - CRUD completo (crear, leer, actualizar, eliminar)
+| - Catálogo general
+| - Búsqueda de productos
+|
+*/
 
-//Define el controlador, que extiende de la clase base Controller de Laravel
 class ProductoController extends Controller
 {    
-    //Consulta la base de datos y muestra los productos a través de la vista
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar productos del usuario
+    |--------------------------------------------------------------------------
+    | Consulta la base de datos y muestra los productos a través de la vista
+    |
+    */
     public function index()
     {
-        //Obtiene los productos del usuario autenticado (where('user_id', Auth::id())) y los pagina de 5 en 5
+        // Obtiene solo los productos del usuario autenticado
+        // paginate(5) → divide los resultados en páginas de 5 productos
         $productos=Producto::where('user_id', Auth::id())->paginate(5); //5 productos por página
         
-        //Devuelve la vista productos.index con la variable $productos
+        //Devuelve la vista productos.index con los productos
         return view('productos.index', compact('productos'));
     }
 
-    //Consulta la tabla productos con el query builder (DB::table) para mostrar un catálogo general
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar catálogo general
+    |--------------------------------------------------------------------------
+    */    
     public function catalogo()
     {
         /*Agrupa por nombre y selecciona un mínimo de id, descripcion, precio, imagen (básicamente 
-        una “versión” de cada producto) y pagina de 4 en 4*/
+        una “versión” de cada producto)*/
         $productos = DB::table('productos')
             ->select(
                 DB::raw('MIN(id) as id'),
@@ -44,7 +69,11 @@ class ProductoController extends Controller
         return view('catalogo', compact('productos'));
     }
 
-    //Muestra el formulario de creación
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar formulario de creación
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         //Recupera todos los productos de la base de datos
@@ -54,10 +83,14 @@ class ProductoController extends Controller
         return view('productos.create', compact('productos'));
     }
 
-    //Guarda un producto en la base de datos
-
-    /*Request $request es la forma objeto de Laravel que se usa para leer y manejar la petición 
-    que llega al servidor (formularios, filtros de búsqueda,...)*/
+     /*
+    |--------------------------------------------------------------------------
+    | Guardar nuevo producto
+    |--------------------------------------------------------------------------
+    | Request $request es la forma objeto de Laravel que se usa para leer y manejar la petición 
+    | que llega al servidor (formularios, filtros de búsqueda,...).
+    |
+    */
     public function store(Request $request)
     {
         //Valida los campos del formulario por parte del servidor
@@ -71,8 +104,8 @@ class ProductoController extends Controller
         ],
         );
 
-        /*Lógica para guardar un producto: Crea un nuevo registro en la tabla productos 
-        con Producto::create([...]), asignando user_id al id del usuario logueado*/
+        /*Crear producto en la base de datos: Lógica para guardar un producto: Crea un nuevo registro 
+        en la tabla productos con Producto::create([...]), asignando user_id al id del usuario logueado*/
         Producto::create([
             'user_id'=>Auth::id(),  //El id del usuario autenticado asignarlo a user_id
             'nombre'=>$request->nombre, //El nombre es el contenido del name del formulario
@@ -87,29 +120,47 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', '¡Producto creado con éxito!');
     }
 
-    //Buscar en la base de datos un producto por su id y se muestra en una vista
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar un producto
+    |--------------------------------------------------------------------------
+    | Buscar en la base de datos un producto por su id y se muestra en una vista.
+    |
+    */
     public function show($id){
 
         /*findOrFail es un método de Eloquent (Laravel) que se usa para buscar un registro por su ID,
-        sino lo encuentra, Laravel devuelve automáticamente una página 404*/
+        sino lo encuentra, Laravel devuelve automáticamente un error 404*/
         $producto=Producto::findOrFail($id);
 
         //Muestra la vista productos.show
         return view('productos.show', compact('producto'));
     }
 
-    //Buscar en la base de datos un producto por su id y mandarlo a un formulario
+    /*
+    |--------------------------------------------------------------------------
+    | Mostrar formulario de edición
+    |--------------------------------------------------------------------------
+    | Buscar en la base de datos un producto por su id y mandarlo a un formulario.
+    |
+    */
     public function edit($id){
         
         /*findOrFail es un método de Eloquent (Laravel) que se usa para buscar un registro por su ID,
-        sino lo encuentra, Laravel devuelve automáticamente una página 404*/
+        sino lo encuentra, Laravel devuelve automáticamente un error 404*/
         $producto=Producto::findOrFail($id);
 
         //Muestra la vista productos.edit con el formulario de edición
         return view('productos.edit', compact('producto'));
     }
 
-    //Lógica para actualizar un producto por su id
+    /*
+    |--------------------------------------------------------------------------
+    | Actualizar producto
+    |--------------------------------------------------------------------------
+    | Lógica para actualizar un producto por su id.
+    | 
+    */
     public function update(Request $request, $id)
     {
         //Valida los campos del formulario recibidos por parte del servidor
@@ -138,7 +189,13 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', '¡Producto actualizado con éxito!');
     }
 
-    //Busca discos por categoría o nombre
+    /*
+    |--------------------------------------------------------------------------
+    | Buscar productos
+    |--------------------------------------------------------------------------
+    | Buscar discos por categoría o nombre.
+    |
+    */
     public function buscar(Request $request)
     {
         //Lee el término de búsqueda ($buscar)
@@ -156,14 +213,20 @@ class ProductoController extends Controller
                             ->orWhere('nombre', 'LIKE', "%$buscar%")
                             ->paginate(4); 
 
-        //Mantiene el parámetro buscar en la paginación ($productos->appends(['buscar' => $buscar]))
+        //Mantener la búsqueda en la paginación
         $productos->appends(['buscar' => $buscar]);
 
         //Devuelve la vista catalogo con los resultados y el texto que se escribió en el input de búsqueda
         return view('catalogo', compact('productos', 'buscar'));
     }
 
-    //Lógica para eliminar un producto por su id
+    /*
+    |--------------------------------------------------------------------------
+    | Eliminar producto
+    |--------------------------------------------------------------------------
+    | Lógica para eliminar un producto por su id.
+    |
+    */
     public function destroy($id)
     {
         //Busca el producto por id (findOrFail)
@@ -176,3 +239,32 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', '¡Producto eliminado con éxito!');
     }
 }
+
+/*
+Este controlador gestiona toda la lógica de los productos, incluyendo el CRUD completo, el catálogo 
+público y la funcionalidad de búsqueda.
+
+Este controlador permite gestionar los vinilos de la tienda, desde su creación hasta su visualización 
+en el catálogo y su búsqueda por categoría o nombre.
+
+He separado claramente la lógica de negocio en el controlador y la visualización en las vistas, 
+siguiendo el patrón MVC que utiliza Laravel.
+
+Uso paginate()     Para mejorar el rendimiento y la experiencia del usuario dividiendo los resultados 
+en páginas.
+
+Diferencia entre Eloquent y DB::table   Eloquent es un ORM orientado a objetos, mientras que DB::table es 
+un query builder más directo. Uso DB::table en el catálogo para hacer agrupaciones más específicas.
+
+Eloquent ORM (Object Relational Mapping) es una herramienta de Laravel que permite interactuar con la base de datos usando clases y 
+objetos en lugar de consultas SQL. 
+Eloquent es la forma de acceder a la base de datos en Laravel usando objetos en vez de SQL 
+(ej: Producto::all();).
+
+FindOrFail()    Busca por ID y si no existe lanza automáticamente un error 404.
+
+Validate()      Para validar los datos en el servidor y evitar datos incorrectos o inseguros.
+
+LIKE    Permite buscar coincidencias parciales en la base de datos.
+
+*/
