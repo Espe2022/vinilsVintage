@@ -173,3 +173,5 @@ Uso de map()    Transforma los datos para adaptarlos a la vista sin modificar la
 Uso de pluck()  Extrae valores concretos para representarlos en listados.
 
 Combinación de datos    Une productos y compras en una sola colección para mostrar información global.
+
+*/
