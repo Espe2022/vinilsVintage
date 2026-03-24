@@ -1,22 +1,36 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!--Formulario de registro que conecta frontend + validación + autenticación
+Este formulario está conectado con el sistema de autenticación de Laravel y utiliza validación en 
+backend, componentes Blade y protección CSRF para garantizar seguridad y reutilización de código -->
 
-        <!-- Name -->
+<!-- Layout para usuarios no autenticados -->
+<x-guest-layout>
+
+    <!-- Formulario de registro de usuario -->
+    <form method="POST" action="{{ route('register') }}">
+        @csrf   <!-- Token de seguridad contra ataques CSRF -->
+
+        <!-- Campo Nombre -->
         <div>
+            <!-- Etiqueta del input -->
             <x-input-label for="name" :value="__('Name')" class="text-marron-chocolate"/>
+
+            <!-- Input de nombre con persistencia de datos si falla validación -->
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            
+            <!-- Muestra errores de validación -->
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
+        <!-- Campo Email -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" class="text-marron-chocolate"/>
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            
+            <!-- Errores del email -->
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- Campo Contraseña -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" class="text-marron-chocolate"/>
 
@@ -25,10 +39,11 @@
                             name="password"
                             required autocomplete="new-password" />
 
+            <!-- Errores de contraseña -->
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
+        <!-- Confirmación de contraseña -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-marron-chocolate"/>
 
@@ -36,14 +51,19 @@
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
+            <!-- Errores de confirmación -->
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <!-- Enlace a login + botón de registro -->
         <div class="flex items-center justify-end mt-4">
+
+            <!-- Enlace para usuarios ya registrados -->
             <a class="underline text-sm text-marron-chocolate hover:text-oro-antiguo rounded-md focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-oro-antiguo" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
+            <!-- Botón para enviar el formulario -->
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
@@ -52,5 +72,41 @@
 
 </x-guest-layout>
 
-<!-- Incluir Pie de página -->
+<!-- Inclusión del footer -->
 @include('pie.footer')
+
+
+
+<!--
+¿Qué diferencia hay entre login y register a nivel backend?
+    - Login → autentica al usuario
+    - Register → crea un usuario nuevo en la base de datos
+
+¿Para qué sirve password_confirmation?
+Laravel usa ese campo para verificar que la contraseña coincida usando la regla: confirmed
+
+¿Dónde se valida este formulario?
+En el backend (controlador o request), no en esta vista.
+
+¿Se guarda la contraseña tal cual?
+No, Laravel la guarda encriptada (hash) usando bcrypt.
+
+¿Qué hace old('name')?
+Mantiene el valor introducido si hay un error, para no perder los datos.
+
+¿Qué pasa cuando se envía el formulario?
+    - Se envía a la ruta register
+    - Laravel valida los datos
+    - Se crea el usuario
+    - Se guarda en la base de datos
+    - Se inicia sesión automáticamente (normalmente)
+
+¿Qué es autocomplete="new-password"?
+Indica al navegador que es una contraseña nueva (evita autocompletado incorrecto).
+
+¿Qué son los componentes <x-...>?
+Son componentes Blade reutilizables que encapsulan HTML y lógica.
+
+¿Qué pasaría si eliminas @csrf?
+Laravel bloquearía la petición por seguridad (error 419).
+-->
