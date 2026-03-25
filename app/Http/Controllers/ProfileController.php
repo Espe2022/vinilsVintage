@@ -103,25 +103,4 @@ class ProfileController extends Controller
     }
 }
 
-/*
-Este controlador gestiona el perfil del usuario, permitiendo editar sus datos, actualizarlos con 
-validación y eliminar la cuenta de forma segura.
 
-Permite que los usuarios gestionen su cuenta dentro de la tienda de vinilos, incluyendo actualizar 
-sus datos o eliminar su perfil.
-
-ProfileUpdateRequest    Es una clase de validación personalizada que separa la lógica de validación 
-del controlador para mantener el código limpio y escalable.
-
-fill()  Rellena el modelo con los datos del formulario.
-
-isDirty()   Comprueba si un campo ha cambiado antes de guardarlo.
-
-email_verified_at = null    Para obligar a verificar el correo si el usuario lo modifica.
-
-Auth::logout()  Cierra la sesión del usuario.
-
-Por seguridad, antes de eliminar la cuenta se pide la contraseña actual, lo que evita eliminaciones 
-accidentales o maliciosas.
-
-*/
