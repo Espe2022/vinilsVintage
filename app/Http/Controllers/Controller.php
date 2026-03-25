@@ -58,16 +58,3 @@ abstract class Controller
 }
 
 
-/*
-Este es el controlador base del que heredan todos los controladores de la aplicación. 
-Permite centralizar lógica común y seguir una estructura organizada en el proyecto.
-
-Es Abstracto porque no se usa directamente, sino que sirve como plantilla para otros controladores.
-
-Mis controladores como CarritoController y CompraController extienden de esta clase, lo que permite 
-mantener una estructura común en toda la aplicación.
-
-Laravel sigue el patrón MVC, y este controlador base forma parte de la capa de controladores, encargada 
-de gestionar la lógica entre el modelo y la vista.
-
-*/
