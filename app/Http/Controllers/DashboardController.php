@@ -157,21 +157,3 @@ class DashboardController extends Controller
     }
 }
 
-/*
-Este controlador demuestra lógica de datos + roles (admin/usuario) + transformación de datos.
-
-Este controlador genera los datos del dashboard, diferenciando entre usuarios normales y administradores, 
-y transformando la información para poder representarla en la interfaz, por ejemplo en listado.
-
-El dashboard permite ver un resumen de la actividad, como productos disponibles y compras realizadas, 
-lo que ayuda a gestionar la tienda.
-
-Control de roles (isAdmin())    Permite mostrar distintos datos según el tipo de usuario.
-
-Uso de map()    Transforma los datos para adaptarlos a la vista sin modificar la base de datos.
-
-Uso de pluck()  Extrae valores concretos para representarlos en listados.
-
-Combinación de datos    Une productos y compras en una sola colección para mostrar información global.
-
-*/
