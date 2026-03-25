@@ -140,15 +140,3 @@ class CarritoController extends Controller
     }
 }
 
-/*
-Este sistema permite que los usuarios añadan vinilos al carrito y gestionen su compra 
-antes de finalizar el pedido.
-He aplicado buenas prácticas como evitar duplicados en el carrito, validar stock 
-y optimizar consultas mediante Eloquent.
-
-Auth::id()     Permite asociar el carrito al usuario autenticado.
-Eager Loading (with('producto'))    Evita consultas innecesarias a la base de datos, 
-                                    mejorando el rendimiento.
-Validación de stock     Evita que el usuario compre más productos de los disponibles.
-Mensajes flash (with('success'))    Se usan para mostrar feedback al usuario tras cada acción.
-*/
