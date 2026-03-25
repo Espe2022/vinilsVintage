@@ -240,31 +240,3 @@ class ProductoController extends Controller
     }
 }
 
-/*
-Este controlador gestiona toda la lógica de los productos, incluyendo el CRUD completo, el catálogo 
-público y la funcionalidad de búsqueda.
-
-Este controlador permite gestionar los vinilos de la tienda, desde su creación hasta su visualización 
-en el catálogo y su búsqueda por categoría o nombre.
-
-He separado claramente la lógica de negocio en el controlador y la visualización en las vistas, 
-siguiendo el patrón MVC que utiliza Laravel.
-
-Uso paginate()     Para mejorar el rendimiento y la experiencia del usuario dividiendo los resultados 
-en páginas.
-
-Diferencia entre Eloquent y DB::table   Eloquent es un ORM orientado a objetos, mientras que DB::table es 
-un query builder más directo. Uso DB::table en el catálogo para hacer agrupaciones más específicas.
-
-Eloquent ORM (Object Relational Mapping) es una herramienta de Laravel que permite interactuar con la base de datos usando clases y 
-objetos en lugar de consultas SQL. 
-Eloquent es la forma de acceder a la base de datos en Laravel usando objetos en vez de SQL 
-(ej: Producto::all();).
-
-FindOrFail()    Busca por ID y si no existe lanza automáticamente un error 404.
-
-Validate()      Para validar los datos en el servidor y evitar datos incorrectos o inseguros.
-
-LIKE    Permite buscar coincidencias parciales en la base de datos.
-
-*/
