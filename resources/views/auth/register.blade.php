@@ -77,36 +77,3 @@ backend, componentes Blade y protección CSRF para garantizar seguridad y reutil
 
 
 
-<!--
-¿Qué diferencia hay entre login y register a nivel backend?
-    - Login → autentica al usuario
-    - Register → crea un usuario nuevo en la base de datos
-
-¿Para qué sirve password_confirmation?
-Laravel usa ese campo para verificar que la contraseña coincida usando la regla: confirmed
-
-¿Dónde se valida este formulario?
-En el backend (controlador o request), no en esta vista.
-
-¿Se guarda la contraseña tal cual?
-No, Laravel la guarda encriptada (hash) usando bcrypt.
-
-¿Qué hace old('name')?
-Mantiene el valor introducido si hay un error, para no perder los datos.
-
-¿Qué pasa cuando se envía el formulario?
-    - Se envía a la ruta register
-    - Laravel valida los datos
-    - Se crea el usuario
-    - Se guarda en la base de datos
-    - Se inicia sesión automáticamente (normalmente)
-
-¿Qué es autocomplete="new-password"?
-Indica al navegador que es una contraseña nueva (evita autocompletado incorrecto).
-
-¿Qué son los componentes <x-...>?
-Son componentes Blade reutilizables que encapsulan HTML y lógica.
-
-¿Qué pasaría si eliminas @csrf?
-Laravel bloquearía la petición por seguridad (error 419).
--->
