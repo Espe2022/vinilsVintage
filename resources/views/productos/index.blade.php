@@ -37,9 +37,9 @@
                             <th class="border border-marron-chocolate px-4 py-2">Actualizar</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        
-                    
+                                            
                         <!-- Iterar productos; si no hay ninguno, mostrar mensaje -->
                         @forelse ($productos as $producto)
                             <tr class="bg-beige-crema">
@@ -80,7 +80,9 @@
                             </tr>
                         @endforelse
                     </tbody>
+
                 </table>
+
                 {{-- Paginación de productos --}}
                 <div class="mt-4 p-5">
                     <!-- Renderiza links de paginación -->
