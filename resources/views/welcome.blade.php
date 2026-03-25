@@ -1,14 +1,25 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 con idioma dinámico desde Laravel -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- Configuración básica -->
     <meta charset="UTF-8">
+    <!-- Responsive design: adapta la web a móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <!-- Título de la página -->
     <title>Vinyls Vintage</title>
 
-    {{-- Carga Tailwind y JS con Vite --}}
+    {{-- 
+        Carga de estilos (Tailwind) y JavaScript mediante Vite.
+        Vite permite compilación rápida y optimización de recursos.
+    --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Preload para imagen principal -->
+    <!-- 
+        Preload de imagen principal para mejorar el rendimiento.
+        Se carga antes que el resto.
+    -->
     <link rel="preload" as="image"
       href="{{ asset('images/AbbeyRoad-256.webp') }}"
       imagesrcset="{{ asset('images/AbbeyRoad-256.webp') }} 256w,
@@ -19,12 +30,27 @@
                   749px">
 </head>
 
+<!-- 
+    Clases de Tailwind para colores personalizados del proyecto
+-->
 <body class="bg-crema-suave text-marron-chocolate">
+
     <!-- Barra superior con buscador -->
     <div class="bg-marron-chocolate text-beige-tostado py-3 px-6 flex justify-end items-center shadow-md">
         
-        <!-- Buscador utilizando un formulario-->
+        <!-- 
+            Formulario de búsqueda:
+            - Método GET para enviar parámetros en la URL
+            - Ruta Laravel 'productos.buscar'
+        -->
         <form action="{{ route('productos.buscar') }}" method="GET" class="relative">
+            
+            <!-- Campo de entrada -->
+            <!-- 
+                Estilos con Tailwind:
+                - Bordes, colores personalizados
+                - Efectos focus (UX)
+            -->
             <input type="text" name="buscar"
                 placeholder="Buscar por categoría o nombre"
                 value="{{ request('buscar') }}"
@@ -32,20 +58,25 @@
                 border border-marron-chocolate focus:border-oro-antiguo focus:ring-2 focus:ring-oro-antiguo 
                 transition w-64">
 
-            <!-- Icono lupa -->
+            <!-- Botón con icono de lupa -->
             <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-marron-chocolate">
                 🔍
             </button>
         </form>
     </div>
 
-    <!-- Encabezado -->
+    <!-- Encabezado principal -->
     <header class="bg-marron-chocolate text-white text-center py-10 shadow-lg">
+
+        <!-- Título -->
         <h1 class="text-6xl font-extrabold leading-tight tracking-tight text-beige-tostado">🎵 Vinyls Vintage</h1>
+        
+        <!-- Descripción -->
         <p class="text-lg mt-6 text-beige-tostado max-w-xl mx-auto">
             Los mejores discos de vinilo clásicos y modernos
         </p>
 
+        <!-- Botón de acceso al catálogo -->
         <a href="http://127.0.0.1:8000/catalogo" class="mt-10 inline-block bg-beige-tostado hover:bg-oro-antiguo text-black px-8 py-3 rounded-xl font-semibold transition">
             Ver catálogo
         </a>
@@ -56,7 +87,14 @@
 
     <!-- Producto 1: Abbey Road (carga prioritaria) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
+        
+        <!-- Contenedor de imagen con animación -->
         <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
+            
+            <!-- 
+                Uso de <picture> para imágenes responsive
+                Se sirven diferentes tamaños según pantalla
+            -->
             <picture>
                 <source 
                     srcset="{{ asset('images/AbbeyRoad-256.webp') }} 256w,
@@ -73,12 +111,14 @@
                     decoding="async">
             </picture>
         </div>
+
+        <!-- Información del producto -->
         <h2 class="text-xl font-semibold mt-3 text-center">Abbey Road</h2>
         <p class="text-oro-antiguo text-center">The Beatles</p>
         <p class="text-marron-chocolate font-bold mt-2 text-center">39.99€</p>
     </div>
 
-    <!-- Producto 2: Dark Side of the Moon (lazy) -->
+    <!-- Producto 2: Dark Side of the Moon (lazy loading para optimizar carga) -->
     <div class="bg-crema-suave rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-4">
         <div class="w-64 h-64 rounded-full overflow-hidden mx-auto transform hover:scale-105 transition duration-300 ease-in-out bg-beige-tostado animate-pulse">
             <picture>
@@ -88,6 +128,10 @@
                             {{ asset('images/Dark_Side_of_the_Moon-749.webp') }} 749w"
                     sizes="(max-width: 640px) 256px, (max-width: 1024px) 512px, 749px"
                     type="image/webp">
+
+                <!-- 
+                    lazy: carga diferida (mejora rendimiento)
+                -->
                 <img 
                     src="{{ asset('images/Dark_Side_of_the_Moon-256.webp') }}"
                     alt="Dark Side of the Moon"
@@ -152,8 +196,98 @@
 
 </section>
 
-<!-- Incluir Pie de página -->
+<!-- 
+    Inclusión de componente Blade (footer reutilizable)
+-->
 @include('pie.footer')
 
 </body>
 </html>
+
+
+
+<!--
+¿Qué tecnología se está utilizando en esta vista?
+Estoy utilizando Laravel con Blade como motor de plantillas. Se ve en expresiones como {{ }} y 
+directivas como @vite o @include.
+
+¿Para qué sirve @vite?
+Sirve para cargar los archivos CSS y JavaScript del proyecto. En este caso, carga Tailwind CSS y el JS 
+compilados con Vite, lo que mejora el rendimiento y la velocidad de desarrollo.
+
+¿Por qué uso meta viewport?
+Para que la página sea responsive, es decir, que se adapte correctamente a móviles, tablets y ordenadores.
+
+¿Qué función tiene el buscador?
+Permite buscar productos por nombre o categoría. Envía los datos mediante método GET a la ruta 
+productos.buscar, lo que hace que los resultados se reflejen en la URL.
+
+¿Por qué uso el método GET y no POST?
+Porque es una búsqueda, no modifica datos. GET permite:
+    - Ver los parámetros en la URL
+    - Compartir búsquedas
+    - Mejor SEO
+
+¿Qué es {{ request('buscar') }}?
+Sirve para mantener el valor del input después de hacer una búsqueda, mejorando la experiencia de usuario.
+
+¿Qué framework de estilos estoy usando?
+Estoy usando Tailwind CSS, que es un framework utility-first que permite diseñar directamente con clases 
+en el HTML.
+
+¿Cómo hago el diseño responsive?
+Con clases de Tailwind como:
+    - grid-cols-1
+    - sm:grid-cols-2
+    - md:grid-cols-3
+    - lg:grid-cols-4
+Ésto cambia el número de columnas según el tamaño de pantalla.
+
+¿Por qué uso <picture> en lugar de solo <img>?
+Para servir imágenes adaptadas a diferentes tamaños de pantalla usando srcset y sizes, lo que mejora el 
+rendimiento.
+
+¿Qué diferencia hay entre loading="eager" y loading="lazy"?
+    - eager: carga inmediata (para contenido importante)
+    - lazy: carga diferida (mejora rendimiento en imágenes no visibles)
+
+¿Por qué la primera imagen tiene fetchpriority="high"?
+Porque es la imagen principal (LCP), y quiero que el navegador la cargue lo antes posible para mejorar 
+el rendimiento percibido.
+
+¿Para qué sirve el preload de la imagen?
+Para indicar al navegador que cargue esa imagen antes que otras, mejorando el tiempo de carga inicial.
+
+¿Qué hace @include('pie.footer')?
+Incluye un componente reutilizable (footer). Esto permite:
+    - Reutilizar código
+    - Mantener mejor la estructura del proyecto
+
+¿Qué mejoras de UX he implementado?
+    - Animaciones (hover, scale)
+    - Mantener valor del buscador
+    - Diseño limpio y claro
+    - Feedback visual en botones
+
+¿Qué mejoras de rendimiento has aplicado?
+    - Lazy loading de imágenes
+    - Preload de imagen principal
+    - Uso de WebP (formato optimizado)
+    - srcset para diferentes tamaños
+
+¿Qué hace asset()?
+Genera la URL correcta de archivos estáticos (como imágenes) dentro del proyecto Laravel.
+
+¿Qué ventajas tiene usar Tailwind en este proyecto?
+    - Desarrollo rápido
+    - Código más limpio (sin CSS separado)
+    - Diseño consistente
+    - Fácil mantenimiento
+
+¿Cómo mejorarías este código?
+    - Convertir productos en componentes reutilizables
+    - Cargar productos dinámicamente desde base de datos
+    - Añadir paginación
+    - Implementar carrito de compra
+    - Mejorar accesibilidad (ARIA)
+-->
