@@ -86,25 +86,3 @@ return new class extends Migration
     }
 };
 
-/*
-Este archivo es una migración que crea las tablas necesarias para gestionar usuarios, recuperación de 
-contraseña y sesiones en la aplicación.
-
-Esta migración es la base del sistema de autenticación de usuarios, necesario para funcionalidades como 
-carrito, compras y perfil.
-
-Las migraciones permiten crear y modificar tablas con código, en lugar de hacerlo manualmente en la 
-base de datos.
-
-up()    Crea las tablas en la base de datos.
-
-down()  Revierte los cambios, eliminando las tablas.
-
-$table->timestamps()    Crea las columnas created_at y updated_at automáticamente.
-
-Email es unique     Para evitar que dos usuarios tengan el mismo correo.
-
-Laravel utiliza migraciones para mantener la base de datos sincronizada entre entornos y facilitar 
-el trabajo en equipo.
-
-*/
