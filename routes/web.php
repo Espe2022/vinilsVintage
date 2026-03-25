@@ -9,46 +9,47 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CompraController;
 use App\Http\Middleware\AdminMiddleware;
 
-
+// Ruta de bienvenida (página principal)
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Sólo muestra el dashboard si está autenticado y verificado, usamos el controlador DashboardController que es una clase
+// Dashboard: solo para usuarios autenticados y verificados, usamos el controlador DashboardController
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//Acceder a Ver Catálogo (todos los productos)
+// Catálogo público: mostrar todos los productos
 Route::get('/catalogo', [ProductoController::class, 'catalogo'])->name('catalogo');
 
-//Puede entrar en estas rutas siempre y cuando esté autenticado (Proteger las rutas)
+// Rutas de perfil: protegidas, solo usuarios autenticados
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Solo los usuarios logueados pueden acceder a estas rutas (middleware de autenticación)
+// Rutas de carrito y compras: solo usuarios autenticados
 Route::middleware('auth')->group(function () {
+    // Carrito
     //Index muestra los productos en el carrito
     Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
     //El controlador store añade el producto al carrito
     Route::post('/carrito/agregar/{id}', [CarritoController::class, 'store'])->name('carrito.agregar');
     //Destroy elimina el producto del carrito
     Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'destroy'])->name('carrito.eliminar');
-
     //Actualizar cantidad de un producto en el carrito
     Route::put('/carrito/actualizar/{id}', [CarritoController::class, 'update'])->name('carrito.update');
 
-    //Finalizar compras
+    // Compras
     Route::post('/comprar', [CompraController::class, 'comprar'])->name('comprar');
 });
 
-//Sólo los usuarios admin pueden acceder a las rutas de productos (index, create, edit, etc.)
+// Rutas de productos: solo usuarios admin
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
-    Route::resource('productos', ProductoController::class);
+    Route::resource('productos', ProductoController::class);    // CRUD completo de productos
 });
 
-//Ruta para búsqueda de discos por género o nombre del cantante
+// Ruta de búsqueda de productos (por nombre o categoría)
 Route::get('/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
 
+// Rutas de autenticación generadas por Laravel Breeze / Jetstream
 require __DIR__.'/auth.php';
