@@ -73,28 +73,3 @@ sistema de autenticación de Laravel mediante rutas, validación y protección C
 
 
 
-<!-- ¿Qué es <x-guest-layout>?
-Es un componente Blade que define la estructura de la página para usuarios no autenticados (Visitantes).
-
-¿Qué hace @csrf?
-Protege contra ataques CSRF generando un token que Laravel valida.
-
-¿Qué es route('login')?
-Genera la URL de la ruta llamada login definida en Laravel.
-
-¿Qué hace old('email')?
-Recupera el valor anterior del formulario si hubo error de validación.
-
-¿Qué es $errors?
-Es un objeto que contiene los errores de validación enviados desde el backend.
-
-¿Qué es __()?
-Función de traducción de Laravel (internacionalización).
-
-¿Qué hace Route::has('password.request')?
-Comprueba si existe esa ruta antes de mostrar el enlace.
-
-¿Qué hace @include('pie.footer')?
-Inserta una vista parcial (el footer) en esta página.
-
--->
