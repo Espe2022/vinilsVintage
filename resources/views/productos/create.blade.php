@@ -1,28 +1,44 @@
+{{-- 
+    Layout principal de la aplicación (estructura base con header, nav, etc.)
+--}}
 <x-app-layout>
+
+
+    {{-- Slot para el encabezado de la página --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-marron-chocolate bg-oro-antiguo leading-tight">
             Crear Producto
         </h2>
     </x-slot>
 
+    <!-- Contenedor del formulario -->
     <div class="max-w-4xl mx-auto bg-beige-crema p-6 pb-24 rounded-lg shadow-md mt-10">
+
+        <!-- Título -->
         <h2 class="text-2xl font-bold text-beige-tostado bg-marron-chocolate hover:bg-oro-antiguo mb-6">Añadir Producto</h2>
 
+        <!-- Formulario que envía datos al backend -->
         <form action="/productos" method="POST">
-            @csrf   <!--Formulario protegido-->
 
-            {{-- Categoría del producto --}}
+            {{-- Token CSRF para seguridad --}}
+            @csrf   
+
+            {{-- ================= CATEGORÍA ================= --}}
             <div class="mb-4">
                 <label for="categoria" class="block text-sm font-medium text-marron-chocolate">Categoría:</label>
-                <!-- Array de categorías -->
+                
+                {{-- Array de categorías definido en la vista --}}
                 @php
                     $categorias = ['Rock', 'Pop', 'Jazz', 'Blues', 'Romántica Latinoamericana', 'Reguetón', 'Soul', 'Rancheras', 'Latino', 'Flamenco', 'Música Clásica'];
                 @endphp
 
+                <!-- Select dinámico -->
                 <select name="categoria" id="categoria"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm"
                         required>
                     <option value="">Selecciona una categoría</option>
+
+                    {{-- Generación dinámica de opciones --}}
                     @foreach ($categorias as $categoria)
                         <option value="{{ $categoria }}"
                             {{ old('categoria') == $categoria ? 'selected' : '' }}>
@@ -31,16 +47,17 @@
                     @endforeach
                 </select>
 
-                {{-- Mensaje de error --}}
-                {{-- Validar formulario por parte del usuario y renderizar un posible error --}}
+                {{-- Mostrar error de validación --}}
                 @error('categoria')
                     <span class="text-sm text-red-600">{{ $message }}</span>
                 @enderror
             </div>
 
-            {{-- Nombre del producto --}}
+            {{-- ================= NOMBRE ================= --}}
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-marron-chocolate">Nombre del producto</label>
+                
+                <!-- Campo texto -->
                 <input type="text" name="nombre" id="nombre"
                         value="{{ old('nombre') }}"
                         placeholder="Escribe el nombre del vinilo"
@@ -53,9 +70,11 @@
                 @enderror
             </div>
 
-            {{-- Descripción --}}
+            {{-- ================= DESCRIPCIÓN ================= --}}
             <div class="mb-4">
                 <label for="descripcion" class="block text-sm font-medium text-marron-chocolate">Descripción</label>
+                
+                <!-- Textarea -->
                 <textarea name="descripcion" id="descripcion" rows="3"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
                         placeholder="Descripción del vinilo"
@@ -68,9 +87,11 @@
                 @enderror
             </div>
 
-            {{-- Precio --}}
+            {{-- ================= PRECIO ================= --}}
             <div class="mb-4">
                 <label for="precio" class="block text-sm font-medium text-marron-chocolate">Precio</label>
+                
+                <!-- Campo numérico con decimales -->
                 <input type="number" name="precio" id="precio" step="0.01" min="0"
                        value="{{ old('precio') }}"
                         class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
@@ -83,9 +104,11 @@
                 @enderror
             </div>
 
-            {{-- Stock --}}
+            {{-- ================= STOCK ================= --}}
             <div class="mb-4">
                 <label for="stock" class="block text-sm font-medium text-marron-chocolate">Stock</label>
+                
+                <!-- Campo numérico solo enteros -->
                 <input type="number" name="stock" id="stock" step="1" min="1" 
                        value="{{ old('stock', $producto->stock ?? '') }}"
                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate shadow-sm
@@ -100,9 +123,11 @@
                 @enderror
             </div>
 
-            {{-- Elegir la url de la imagen del disco --}}
+            {{-- ================= IMAGEN ================= --}}
             <div class="mb-4">
                 <label for="imagen">Seleccionar URL de la Imagen</label>
+
+                <!-- Campo tipo URL -->
                 <input type="url" name="imagen" id="imagen"
                        value="{{ old('imagen') }}"
                        class="mt-1 block w-full rounded-md bg-beige-crema border-marron-chocolate focus:border-oro-antiguo focus:ring-oro-antiguo shadow-sm sm:text-sm" 
