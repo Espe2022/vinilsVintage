@@ -113,23 +113,3 @@ class CompraController extends Controller
     }
 }
 
-/*
-Este controlador gestiona el proceso de compra completo. Utiliza una transacción de 
-base de datos para garantizar que todas las operaciones se ejecuten correctamente o se 
-deshagan en caso de error, evitando inconsistencias.
-
-Este sistema permite simular una compra real de vinilos, controlando el stock y 
-guardando el historial de compras del usuario.
-
-Transacciones (DB::transaction)     Aseguran la integridad de los datos. Si falla algo, 
-                                    se revierte toda la operación.
-
-lockForUpdate()     Bloquea el registro del producto para evitar problemas de concurrencia, 
-                    como vender más stock del disponible.
-
-Validación de stock     Se comprueba antes de descontar para evitar errores en la compra.
-
-Vaciado del carrito      Una vez completada la compra, se eliminan los productos del carrito.
-
-Como mejora futura, se podría añadir pago online (Stripe, PayPal) y generación de pedidos.
-*/
