@@ -208,8 +208,8 @@
 
 <!--
 ¿Qué tecnología se está utilizando en esta vista?
-Estoy utilizando Laravel con Blade como motor de plantillas. Se ve en expresiones como {{ }} y 
-directivas como @vite o @include.
+Estoy utilizando Laravel con Blade como motor de plantillas. Se ve en expresiones como doble llave y 
+directivas.
 
 ¿Para qué sirve @vite?
 Sirve para cargar los archivos CSS y JavaScript del proyecto. En este caso, carga Tailwind CSS y el JS 
