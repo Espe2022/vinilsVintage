@@ -136,10 +136,10 @@
 
                     <!-- Nombre del producto -->
                     <!-- whitespace-nowrap evita saltos de línea -->
-                    <h3 class="text-xl font-semibold mt-3 text-center whitespace-nowrap overflow-hidden">{{ $producto->nombre }}</h3>
+                    <h3 class="text-xl font-semibold mt-3 text-center text-marron-chocolate line-clamp-2 break-words min-h-[3.5rem]">{{ $producto->nombre }}</h3>
                     
                     <!-- Descripción -->
-                    <p class="text-oro-antiguo text-center">{{ $producto->descripcion }}</p>
+                    <p class="text-oro-antiguo text-center line-clamp-2">{{ $producto->descripcion }}</p>
                     
                     <!-- Precio formateado -->
                     <p class="text-marron-chocolate font-bold mt-2 text-center">{{ number_format($producto->precio, 2) }} €</p>
