@@ -162,7 +162,7 @@
                                 </form>
                             @else
                                 <button disabled
-                                    class="bg-gray-300 text-gray-600 font-semibold py-2 px-4 rounded-full w-full max-w-xs cursor-not-allowed">
+                                    class="bg-beige-tostado text-marron-chocolate font-semibold py-2 px-4 mt-4 rounded-full w-full max-w-xs cursor-not-allowed opacity-70">
                                     Sin stock
                                 </button>
                             @endif
