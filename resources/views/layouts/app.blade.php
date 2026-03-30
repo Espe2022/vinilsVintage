@@ -30,7 +30,9 @@
 
         {{-- Mensaje de éxito de creación de usuario --}}
         @if (session('success'))
-            <div style="margin: 16px; padding: 12px; background-color: #d1fae5; color: #065f46; border-radius: 8px;">
+            <div style=" margin: 16px; padding: 12px 16px; background-color: #f5efe3; color: #4a2c2a;
+                border: 1px solid #c9a96b; border-left: 5px solid #b08d57; border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(74, 44, 42, 0.08);">
                 {{ session('success') }}
             </div>
         @endif
