@@ -60,7 +60,8 @@ class ProductoController extends Controller
                 'nombre',
                 DB::raw('MIN(descripcion) as descripcion'),
                 DB::raw('MIN(precio) as precio'),
-                DB::raw('MIN(imagen) as imagen')
+                DB::raw('MIN(imagen) as imagen'),
+                DB::raw('MIN(stock) as stock')
             )
             ->groupBy('nombre')
             ->paginate(4);   //pagina de 4 en 4

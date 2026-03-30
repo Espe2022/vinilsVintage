@@ -147,19 +147,25 @@
                     <!-- Zona de acciones -->
                     <div class="mt-4 w-full flex flex-col items-center space-y-3">
                         @auth
-                            
-                            <!-- 
-                                Formulario para añadir producto al carrito:
-                                - Método POST porque modifica datos
-                                - Incluye protección CSRF
-                            -->
-                            <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST" class="mt-4 w-full text-center">
-                                @csrf
-                                <button type="submit" 
-                                    class="bg-beige-tostado hover:bg-beige-tostado-hover text-marron-chocolate font-semibold py-2 px-4 rounded-full transition w-full max-w-xs">
-                                    🛒 Añadir al carrito
+                            @if ($producto->stock > 0)
+                                <!-- 
+                                    Formulario para añadir producto al carrito:
+                                    - Método POST porque modifica datos
+                                    - Incluye protección CSRF
+                                -->
+                                <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST" class="mt-4 w-full text-center">
+                                    @csrf
+                                    <button type="submit" 
+                                        class="bg-beige-tostado hover:bg-beige-tostado-hover text-marron-chocolate font-semibold py-2 px-4 rounded-full transition w-full max-w-xs">
+                                        🛒 Añadir al carrito
+                                    </button>
+                                </form>
+                            @else
+                                <button disabled
+                                    class="bg-gray-300 text-gray-600 font-semibold py-2 px-4 rounded-full w-full max-w-xs cursor-not-allowed">
+                                    Sin stock
                                 </button>
-                            </form>
+                            @endif
                         @endauth
                     </div>
 
