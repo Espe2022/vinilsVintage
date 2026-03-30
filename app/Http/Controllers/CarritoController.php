@@ -43,8 +43,14 @@ class CarritoController extends Controller
         //Obtiene el ID del usuario autenticado actualmente en la sesión
         $user_id = Auth::id();
 
+        /*Busca en la tabla productos el registro con ese id.
+        Si lo encuentra, te devuelve el modelo en la variable $producto.
+        Si no existe ese id, lanza un error 404*/
         $producto = Producto::findOrFail($id);
 
+        /*Si el stock es 0 o negativo, no sigue con la lógica de añadir al carrito.
+        En su lugar, redirige a la página anterior (back()) y guarda en sesión un mensaje flash 
+        de error: "Este producto está agotado"*/
         if ($producto->stock <= 0) {
             return redirect()->back()->with('error', 'Este producto está agotado.');
         }
@@ -54,11 +60,16 @@ class CarritoController extends Controller
                         ->where('producto_id', $id)
                         ->first();
 
+        /*Si el usuario ya tiene ese producto en el carrito:
+        Comprueba si la cantidad actual es mayor o igual que el stock.
+        Si ya ha llegado al máximo → devuelve error y no incrementa.
+        Si aún no ha llegado → hace increment('cantidad').
+        Si todavía no lo tiene:
+        Crea la línea en el carrito con cantidad 1.*/
         if ($item) {
             if ($item->cantidad >= $producto->stock) {
                 return redirect()->back()->with('error', 'No puedes añadir más unidades. Stock máximo alcanzado.');
             }
-
             //Ya existe: aumentar cantidad
             $item->increment('cantidad');
         } else {
@@ -81,8 +92,8 @@ class CarritoController extends Controller
     */
     public function index()
     {
-        //Obtener todos los productos del usuario actual
-        // with('producto') carga la relación para evitar consultas extra (Eager Loading)
+        /*Obtener todos los productos del usuario actual
+        with('producto') carga la relación para evitar consultas extra (Eager Loading)*/
         $items = Carrito::with('producto')
             ->where('user_id', Auth::id())
             ->get();
@@ -105,8 +116,8 @@ class CarritoController extends Controller
     */
     public function update(Request $request, $id)
     {
-        //Buscar el item del carrito junto con el producto
-         $item = Carrito::with('producto')
+        //Busca un único registro de carrito del usuario logueado y, si no existe, lanza un 404
+        $item = Carrito::with('producto')
             ->where('user_id', Auth::id())
             ->where('id', $id)
             ->firstOrFail();
@@ -142,7 +153,8 @@ class CarritoController extends Controller
     */
     public function destroy($id)
     {
-        //Busca un registro específico (item) por su ID
+        /*Busca un único registro del carrito que pertenezca al usuario logueado y tenga ese id, 
+        y si no existe lanza un 404*/
         $item = Carrito::where('user_id', Auth::id())
             ->where('id', $id)
             ->firstOrFail();
