@@ -28,6 +28,13 @@
     {{-- Aplico fuente base y suavizado de tipografía con clases de Tailwind --}}
     <body class="font-sans antialiased">
 
+        {{-- Mensaje de éxito de creación de usuario --}}
+        @if (session('success'))
+            <div style="margin: 16px; padding: 12px; background-color: #d1fae5; color: #065f46; border-radius: 8px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
         {{-- Contenedor que ocupa toda la altura de la pantalla y define el fondo principal --}}
         <div class="min-h-screen bg-beige-tostado">
 
