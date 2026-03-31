@@ -34,25 +34,3 @@ Si no se llama: Alpine no funcionaría, porque no se inicializa el sistema react
 */
 Alpine.start();
 
-/*
-¿Para qué sirve este fichero?
-Este archivo inicializa JavaScript del frontend, concretamente:
-    - Importa configuraciones base (bootstrap.js)
-    - Carga Alpine.js
-    - Lo activa en la aplicación
-
-¿Qué es Alpine.js?
-Alpine.js es un framework ligero de JavaScript que permite añadir interactividad directamente en el HTML, 
-similar a Vue pero mucho más simple. Ejemplo:
-        <div x-data="{ open: false }">
-
-¿Qué diferencia hay entre Alpine y Vue/React?
-    - Alpine → ligero, se usa directamente en HTML
-    - Vue/React → frameworks más complejos, basados en componentes
-
-Laravel usa herramientas como Vite para compilar JS, y este archivo suele ser el punto de entrada 
-del frontend.
-
-¿Esto se ejecuta en servidor o en cliente?
-En el cliente (navegador), porque es JavaScript del frontend.
-*/
