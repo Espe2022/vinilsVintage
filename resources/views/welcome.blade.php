@@ -77,7 +77,7 @@
         </p>
 
         <!-- Botón de acceso al catálogo -->
-        <a href="http://127.0.0.1:8000/catalogo" class="mt-10 inline-block bg-beige-tostado hover:bg-oro-antiguo text-black px-8 py-3 rounded-xl font-semibold transition">
+        <a href="http://127.0.0.1:8000/catalogo" class="mt-10 inline-block bg-beige-tostado hover:bg-oro-antiguo text-marron-chocolate px-8 py-3 rounded-xl font-semibold transition">
             Ver catálogo
         </a>
     </header>
