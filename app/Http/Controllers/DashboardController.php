@@ -150,10 +150,11 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Retornar vista
+        | Retornar vistaAQUIIIII
         |--------------------------------------------------------------------------
         */
-        return view('dashboard', compact('nombres', 'cantidades', 'productosCombinados'));
+        return view('dashboard', compact('nombres', 'cantidades', 'productosCombinados', 
+        'productosPropios', 'productosComprados'));
     }
 }
 
