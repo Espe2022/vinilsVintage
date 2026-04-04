@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
 
         //Redirige al dashboard con mensaje de Bienvenida
         return redirect()->intended(route('dashboard', absolute: false))
-                ->with('status', 'Bienvenido de nuevo.');
+                ->with('status', 'Bienvenido de nuevo');
     }
 
     /**

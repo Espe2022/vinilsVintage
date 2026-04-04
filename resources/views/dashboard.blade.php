@@ -9,8 +9,13 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-                <x-auth-session-status class="mb-4" :status="session('status')" />
-                
+                <div class="text-center mb-4">
+                    <x-auth-session-status
+                        class="inline-block text-lg font-semibold text-marron-chocolate bg-oro-antiguo/40 px-3 py-1 rounded"
+                        :status="session('status')"
+                    />
+                </div>
+
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-beige-crema border-b border-gray-200">
                         <h1 class="bg-marron-chocolate text-beige-tostado text-5xl text-center font-bold mb-8">
