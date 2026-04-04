@@ -10,12 +10,6 @@
     <div class="py-12 bg-crema-suave">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-crema-suave overflow-hidden shadow-sm sm:rounded-lg p-6">
-                {{-- Mensaje de éxito después de crear/actualizar un producto --}}
-                @if (session('success'))
-                    <div class="mb-4 p-4 rounded-md bg-marron-chocolate border text-oro-antiguo">
-                        {{ session('success') }}
-                    </div>
-                @endif
                 
                 <!-- Botón para crear un nuevo producto -->
                 <div class="mb-4">
