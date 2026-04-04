@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         //Previene ataques de fijación de sesión cambiando el ID de sesión del usuario por uno nuevo
         $request->session()->regenerate();
 
-        //Redirige al dashboard
+        //Redirige al dashboard con mensaje de Bienvenida
         return redirect()->intended(route('dashboard', absolute: false))
                 ->with('status', 'Bienvenido de nuevo.');
     }
